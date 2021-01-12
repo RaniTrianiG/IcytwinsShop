@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "padding": 10,
+    }
+  }
+>
+  <SvgMock
+    height="50%"
+    width="100%"
+  />
+  <Text
+    style={
+      Object {
+        "fontSize": 12,
+        "marginRight": 5,
+      }
+    }
+  >
+    Example Page
+  </Text>
+  <View
+    accessibilityRole="button"
+    accessibilityStates={Array []}
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#007AFF",
+              "fontSize": 18,
+              "padding": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Go To Auth Page
+      </Text>
+    </View>
+  </View>
+</View>
+`;
