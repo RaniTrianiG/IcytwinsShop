@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'PijarMahir' do
-  # Pods for PijarMahir
+target 'IcytwinsShop' do
+  # Pods for IcytwinsShop
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,7 +34,7 @@ target 'PijarMahir' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'PijarMahirTests' do
+  target 'IcytwinsShopTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -42,10 +42,10 @@ target 'PijarMahir' do
   use_native_modules!
 end
 
-target 'PijarMahir-tvOS' do
-  # Pods for PijarMahir-tvOS
+target 'IcytwinsShop-tvOS' do
+  # Pods for IcytwinsShop-tvOS
 
-  target 'PijarMahir-tvOSTests' do
+  target 'IcytwinsShop-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

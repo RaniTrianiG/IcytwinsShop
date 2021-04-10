@@ -1,4 +1,4 @@
-package com.telkom.pijarmahir;
+package com.icytwins;
 
 import com.facebook.react.ReactActivity;
 import com.reactnativenavigation.NavigationActivity;
@@ -11,6 +11,6 @@ public class MainActivity extends NavigationActivity {
    */
   // @Override
   // protected String getMainComponentName() {
-  //   return "PijarMahir";
+  //   return "IcytwinsShop";
   // }
 }

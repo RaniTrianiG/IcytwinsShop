@@ -1,4 +1,4 @@
-package com.telkom.pijarmahir;
+package com.icytwins;
 
 import android.app.Application;
 import android.content.Context;

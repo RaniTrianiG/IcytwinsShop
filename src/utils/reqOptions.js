@@ -4,7 +4,7 @@ const reqOptions = async () => {
   const userToken = await AsyncStorage.getItem('firstLaunch');
   return {
     auth: {
-      username: 'telkom',
+      username: 'icytwins',
       password: 'da1c25d8-37c8-41b1-afe2-42dd4825bfea'
     },
     headers: {
