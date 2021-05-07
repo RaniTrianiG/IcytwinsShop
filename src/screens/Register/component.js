@@ -1,50 +1,71 @@
 import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, Text } from 'react-native';
+
+import { Navigation } from 'react-native-navigation';
+
 import PropTypes from 'prop-types';
-import Modal from 'react-native-modal';
+
 import FormRegister from '../../components/forms/Register';
+import { SCREENS } from '../../constants';
+
 import styles from './styles';
-import Logo from '../../assets/svg/login-illustration.svg';
 
-class Register extends React.Component {
-  state = {
-    isModalVisible: false
-  };
-
-  _handleSubmit = async data => {
+class Login extends React.Component {
+  componentDidMount() {
     const { actions } = this.props;
-    actions.postRegister(data);
+    actions.logout();
+  }
+
+  _handleSubmit = data => {
+    const { actions } = this.props;
+
+    actions.postRegister(
+      {
+        ...data,
+        password_confirmation: data.password,
+        username: data.name.replace(/ /g, '').toLowerCase(),
+        role: 1,
+        phone_number: ''
+      },
+      this._handleLogin
+    );
   };
 
-  _handleModal = () => {
-    const { isModalVisible } = this.state;
-    this.setState({ isModalVisible: !isModalVisible });
+  _handleLogin = () => {
+    const { componentId } = this.props;
+
+    Navigation.push(componentId, {
+      component: {
+        name: SCREENS.LOGIN,
+        options: {
+          statusBar: {
+            style: 'dark',
+            backgroundColor: '#F9F9F9'
+          }
+        }
+      }
+    });
   };
 
   render() {
-    const { isModalVisible } = this.state;
     return (
-      <ScrollView contentContainerStyle={styles.screenContainer}>
-        <View style={styles.logoContainer}>
-          <Logo width="100%" height="100%" />
-        </View>
-        <FormRegister onSubmit={this._handleSubmit} />
-        <Modal isVisible={isModalVisible} onBackdropPress={this._handleModal}>
-          <View style={styles.modalContainer}>
-            <Text>Success Modal</Text>
-          </View>
-        </Modal>
-      </ScrollView>
+      <View style={styles.loginScreen}>
+        <Text style={styles.title}>Sign Up</Text>
+
+        <FormRegister onSubmit={this._handleSubmit} handleLogin={this._handleLogin} />
+      </View>
     );
   }
 }
 
-Register.defaultProps = {
+Login.defaultProps = {
+  componentId: 'registerscreen',
   actions: {}
 };
 
-Register.propTypes = {
+Login.propTypes = {
+  componentId: PropTypes.string,
   actions: PropTypes.object
 };
 
-export default Register;
+export default Login;

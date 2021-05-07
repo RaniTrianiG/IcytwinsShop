@@ -1,12 +1,23 @@
 import validateInput from '../../../utils/validateInput';
 
 const validate = values => {
-  const { username } = values;
+  const { email, password } = values;
+
   const errors = {
-    username: validateInput(username, [
+    email: validateInput(email, [
       {
         rule: 'required',
         message: 'Email required'
+      },
+      {
+        rule: 'email',
+        message: 'Incorrect email format'
+      }
+    ]),
+    password: validateInput(password, [
+      {
+        rule: 'required',
+        message: 'Password required'
       }
     ])
   };

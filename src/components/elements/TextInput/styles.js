@@ -2,22 +2,46 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   container: {
-    marginBottom: 5
+    margin: 0
   },
-  errorMessage: {
-    color: 'red',
-    fontSize: 11
+
+  error: {
+    color: '#DB3022',
+    marginLeft: 20,
+    marginTop: 2
+  },
+
+  innerInput: {
+    fontFamily: 'serif',
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 20,
+    marginTop: 3,
+    minHeight: 20,
+    paddingHorizontal: 0,
+    paddingVertical: 0
+  },
+  input: {
+    borderBottomWidth: 0,
+    paddingVertical: 0
   },
   inputContainer: {
-    borderColor: '#ccc',
+    backgroundColor: '#fff',
+    borderColor: '#fff',
     borderRadius: 5,
     borderWidth: 1,
-    marginBottom: 5,
-    padding: 3
+    elevation: 1,
+    marginBottom: 8,
+    paddingBottom: 10,
+    paddingHorizontal: 20,
+    paddingTop: 12
   },
   label: {
-    marginBottom: 10,
-    marginLeft: 10
+    color: '#9B9B9B',
+    fontFamily: 'serif',
+    fontSize: 11,
+    fontWeight: '400',
+    lineHeight: 14.58
   }
 });
 

@@ -1,17 +1,47 @@
 import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
-  buttonFooter: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+  button: {
+    backgroundColor: '#DB3022',
+    borderRadius: 30,
+    marginHorizontal: 14,
+    paddingVertical: 14
   },
-  checkboxContainer: {
+  buttonText: {
+    fontFamily: 'serif',
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 20,
+    textTransform: 'uppercase'
+  },
+
+  inputContainer: {
+    marginHorizontal: 16
+  },
+  register: {
     alignItems: 'center',
-    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 15
+    justifyContent: 'flex-end',
+    marginBottom: 30,
+    marginHorizontal: 16,
+    marginTop: 4
+  },
+  registerBtn: {
+    aspectRatio: 1,
+    width: 24
+  },
+  registerBtnImg: {
+    flex: 1,
+    height: null,
+    resizeMode: 'contain',
+    width: null
+  },
+  registerText: {
+    fontFamily: 'serif',
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 20,
+    marginRight: 3
   }
 });
 

@@ -1,27 +1,37 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 import { Input as TextInput } from 'react-native-elements';
+
 import PropTypes from 'prop-types';
-import { Text, View } from 'react-native';
+
 import style from './styles';
 
 const Component = ({
   label,
   meta: { touched, error },
-  input: { onChange, placeholder, ...restInput },
+  input: { onChange, inputStyle, ...restInput },
   ...rest
 }) => {
   return (
     <View style={style.container}>
-      <Text style={style.label}>{label}</Text>
       <TextInput
-        inputContainerStyle={style.inputContainer}
-        errorMessage={error && touched ? error : null}
-        errorStyle={style.errorMessage}
-        // leftIcon={<Icon name="user" size={24} color="black" />}
+        label={label}
+        inputContainerStyle={style.input}
         onChangeText={onChange}
+        containerStyle={[
+          style.inputContainer,
+          error && touched && { borderColor: '#DB3022', marginBottom: 0 }
+        ]}
+        inputStyle={[style.innerInput, inputStyle]}
+        labelStyle={[style.label, error && touched && { color: '#DB3022' }]}
         {...restInput}
         {...rest}
       />
+      {error && touched && (
+        <Text style={[style.label, style.error, error && touched && { marginBottom: 8 }]}>
+          {error && touched ? error : null}
+        </Text>
+      )}
     </View>
   );
 };
