@@ -13,38 +13,42 @@ import BackIcon from '../../assets/png/icon-back.png';
 import styles from './styles';
 
 class Login extends React.Component {
-  _navigateToDashboard = () => {
-    Navigation.setRoot({
-      root: {
-        stack: {
-          children: [
-            {
-              component: {
-                name: SCREENS.HOME,
-                options: {
-                  statusBar: {
-                    style: 'dark',
-                    backgroundColor: '#F9F9F9',
-                    drawBehind: false
+  _navigateToDashboard = res => {
+    const { role } = res?.data ?? {};
+
+    if (role !== undefined) {
+      Navigation.setRoot({
+        root: {
+          stack: {
+            children: [
+              {
+                component: {
+                  name: role === 1 ? SCREENS.HOME : SCREENS.USER_HOME,
+                  options: {
+                    statusBar: {
+                      style: 'dark',
+                      backgroundColor: '#F9F9F9',
+                      drawBehind: false
+                    }
                   }
                 }
               }
-            }
-          ],
-          options: {
-            topBar: {
-              visible: false
+            ],
+            options: {
+              topBar: {
+                visible: false
+              }
             }
           }
         }
-      }
-    });
+      });
+    }
   };
 
   _handleSubmit = data => {
     const { actions } = this.props;
 
-    actions.postLogin(data, this._navigateToDashboard);
+    actions.postLogin(data, actions.getProfile(this._navigateToDashboard));
   };
 
   _handleForget = () => {

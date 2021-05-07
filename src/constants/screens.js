@@ -23,7 +23,11 @@ const screens = {
   DETAIL_PRODUCT: 'app.product.detail',
 
   TRANSACTION: 'app.transaction.list',
-  DETAIL_TRANSACTION: 'app.transaction.detail'
+  DETAIL_TRANSACTION: 'app.transaction.detail',
+
+  USER_HOME: 'app.user.home',
+  USER_DETAIL_PRODUCT: 'app.user.detail_product',
+  USER_CART: 'app.user.cart'
 };
 
 export default screens;

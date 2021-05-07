@@ -9,7 +9,7 @@ const reqOptions = async () => {
       password: 'da1c25d8-37c8-41b1-afe2-42dd4825bfea'
     },
     headers: {
-      token: userToken || null,
+      Authorization: userToken ? `Bearer ${userToken}` : null,
       'Content-Type': 'application/json',
       Accept: 'application/json'
       // 'access-token': localStorage.getItem('api_key') || null

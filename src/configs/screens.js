@@ -23,6 +23,10 @@ import ProductAdd from '../screens/Product/AddProduct';
 
 import Transaction from '../screens/Transaction/ListTransaction';
 
+import UserHome from '../screens/User/Home';
+import UserDetailProduct from '../screens/User/Detail';
+import UserCartProduct from '../screens/User/Cart';
+
 const store = configureStore();
 
 const registerScreens = () => {
@@ -58,25 +62,14 @@ const registerScreens = () => {
 
   Navigation.registerComponentWithRedux(SCREENS.TRANSACTION, () => Transaction, Provider, store);
 
-  // Navigation.registerComponentWithRedux('app.HistoryScreen', () => History, Provider, store);
-
-  // Navigation.registerComponentWithRedux('app.SettingsScreen', () => Settings, Provider, store);
-
-  // Navigation.registerComponentWithRedux('app.DevicesScreen', () => Devices, Provider, store);
-
-  // Navigation.registerComponentWithRedux(
-  //   'app.DetailHistoryScreen',
-  //   () => DetailHistory,
-  //   Provider,
-  //   store
-  // );
-
-  // Navigation.registerComponentWithRedux(
-  //   'app.DetailDeviceScreen',
-  //   () => DeviceDetail,
-  //   Provider,
-  //   store
-  // );
+  Navigation.registerComponentWithRedux(SCREENS.USER_HOME, () => UserHome, Provider, store);
+  Navigation.registerComponentWithRedux(
+    SCREENS.USER_DETAIL_PRODUCT,
+    () => UserDetailProduct,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(SCREENS.USER_CART, () => UserCartProduct, Provider, store);
 };
 
 export default registerScreens;
