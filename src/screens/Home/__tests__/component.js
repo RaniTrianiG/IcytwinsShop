@@ -3,7 +3,7 @@ import { Button } from 'react-native';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import { reducer as formReducer } from 'redux-form';
 
 import renderer from 'react-test-renderer';
@@ -28,7 +28,7 @@ describe('Home Tests', () => {
     initialState = {
       form: formReducer
     };
-    wrapper = shallow(<Home {...props}/>)
+    wrapper = shallow(<Home {...props} />);
   });
 
   afterEach(() => {
@@ -48,9 +48,13 @@ describe('Home Tests', () => {
   });
 
   it('test home button', () => {
-    const spy = jest.spyOn(wrapper.instance(), 'navigateToAuth')
+    const spy = jest.spyOn(wrapper.instance(), 'navigateToAuth');
     wrapper.instance().forceUpdate();
-    wrapper.find(Button).at(0).props().onPress();
-    expect(spy).toBeCalled()
-  })
+    wrapper
+      .find(Button)
+      .at(0)
+      .props()
+      .onPress();
+    expect(spy).toBeCalled();
+  });
 });

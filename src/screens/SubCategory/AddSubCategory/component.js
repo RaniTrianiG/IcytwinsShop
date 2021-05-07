@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import Navbar from '../../../components/elements/Navbar';
 
@@ -29,8 +29,8 @@ AddSubCategory.defaultProps = {
 };
 
 AddSubCategory.propTypes = {
-  componentId: PropTypes.string,
-  actions: PropTypes.object
+  // componentId: PropTypes.string,
+  // actions: PropTypes.object
 };
 
 export default AddSubCategory;

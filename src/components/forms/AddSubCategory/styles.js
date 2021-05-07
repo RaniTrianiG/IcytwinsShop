@@ -18,7 +18,7 @@ const style = StyleSheet.create({
 
   inputContainer: {
     flex: 1,
-    marginHorizontal: 16,
+    marginHorizontal: 16
   }
 });
 
