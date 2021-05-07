@@ -17,6 +17,8 @@ const reducers = (state = initialState, action) => {
       return objectUpdater(state, { isLoading: false, data });
     case ACTIONS.GET_HOME_FAILED:
       return objectUpdater(state, { isLoading: false, error });
+    case ACTIONS.GET_DASHBOARD:
+      return objectUpdater(state, { isLoading: false, data });
     default:
       return state;
   }
