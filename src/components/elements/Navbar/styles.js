@@ -12,11 +12,17 @@ const style = StyleSheet.create({
     width: 30
   },
   headerBtnIcon: {
-    color: "#FFFFFF",
-    fontFamily: "Lato-Bold",
+    flex: 1,
+    height: null,
+    resizeMode: 'contain',
+    width: null
+  },
+  headerBtnIconText: {
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontFamily: 'Lato-Bold',
     fontSize: 16,
-    alignSelf: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
     marginVertical: 20
   },
   headerText: {
@@ -34,8 +40,8 @@ const style = StyleSheet.create({
   menuItem: {
     flex: 1,
     fontSize: 14,
-    lineHeight: 21, 
-    marginTop: 15
+    lineHeight: 21,
+    marginVertical: 7.5
   },
   menuItemContainer: {
     alignItems: 'center',

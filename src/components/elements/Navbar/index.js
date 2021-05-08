@@ -100,20 +100,18 @@ const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress 
       </View>
 
       <Modal
+        useNativeDriver
         animationIn="slideInLeft"
         animationOut="slideOutLeft"
         isVisible={isVisible}
         onBackdropPress={toogleSideMenu(false)}
         backdropOpacity={0.5}
         style={styles.modal}
-        // eslint-disable-next-line react/jsx-boolean-value
-        useNativeDriver={true}
       >
         <View style={styles.sideContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 23 }}>
             <View style={styles.sidePhoto}>
-              <Text style={styles.headerBtnIcon}
-              >{initialName}</Text>
+              <Text style={styles.headerBtnIconText}>{initialName}</Text>
             </View>
 
             <View style={{ flex: 1 }}>
@@ -145,7 +143,7 @@ Component.defaultProps = {
   fullName: 'Icytwins.beauty',
   mail: 'Icytwins.beauty@gmail.com',
   initialName: 'Icytwins.beauty',
-  onNotificationBtnPress: () => { }
+  onNotificationBtnPress: () => {}
 };
 
 Component.propTypes = {
