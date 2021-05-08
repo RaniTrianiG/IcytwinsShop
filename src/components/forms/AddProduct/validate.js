@@ -1,12 +1,38 @@
 import validateInput from '../../../utils/validateInput';
 
 const validate = values => {
-  const { username } = values;
+  // eslint-disable-next-line camelcase
+  const { product_name, price, stock, discount, description } = values;
+
   const errors = {
-    username: validateInput(username, [
+    product_name: validateInput(product_name, [
       {
         rule: 'required',
-        message: 'Email required'
+        message: 'Field required'
+      }
+    ]),
+    price: validateInput(price, [
+      {
+        rule: 'required',
+        message: 'Field required'
+      }
+    ]),
+    stock: validateInput(stock, [
+      {
+        rule: 'required',
+        message: 'Field required'
+      }
+    ]),
+    discount: validateInput(discount, [
+      {
+        rule: 'required',
+        message: 'Field required'
+      }
+    ]),
+    description: validateInput(description, [
+      {
+        rule: 'required',
+        message: 'Field required'
       }
     ])
   };

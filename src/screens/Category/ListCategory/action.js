@@ -25,7 +25,7 @@ export const getData = successCallback => async dispatch => {
       const { data } = res;
 
       dispatch({ type: ACTIONS.GET_CATEGORY_SUCCESS, data });
-      successCallback(res);
+      successCallback();
     })
     .catch(error => {
       dispatch({ type: ACTIONS.GET_CATEGORY_FAILED, error });

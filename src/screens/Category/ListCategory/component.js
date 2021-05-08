@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
 import { Button } from 'react-native-elements';
-import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
 
 import PropTypes from 'prop-types';
 
@@ -12,11 +11,6 @@ import Navbar from '../../../components/elements/Navbar';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
-
-const DUMMY_DATA = {
-  tableFlex: [0.5, 3, 1],
-  tableHead: ['#', 'Category', 'Action']
-};
 
 class ListCategory extends React.Component {
   componentDidMount() {
@@ -60,25 +54,19 @@ class ListCategory extends React.Component {
     });
   };
 
-  _renderNames = data => (
-    <View style={styles.tableRow}>
-      <Text style={styles.tableText}>{data}</Text>
-    </View>
-  );
-
   _renderActions = data => (
-    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(data)}>
+    <TouchableOpacity onPress={this._handleViewDetail(data)}>
       <Text style={[styles.tableText, { textDecorationLine: 'underline' }]}>View</Text>
     </TouchableOpacity>
   );
 
-  _renderCustom = (cellData, cellIndex, index) => {
-    if (cellIndex === 2) {
-      return this._renderActions(cellData, index);
-    }
-
-    return cellData;
-  };
+  _renderItem = ({ item, index }) => (
+    <View style={[styles.tableRow, { flexDirection: 'row' }]}>
+      <Text style={[styles.tableText, { flex: 0.5 }]}>{index + 1}</Text>
+      <Text style={[styles.tableText, { flex: 3 }]}>{item?.name ?? ''}</Text>
+      <View style={{ flex: 1 }}>{this._renderActions(item)}</View>
+    </View>
+  );
 
   render() {
     const { category } = this.props;
@@ -99,34 +87,17 @@ class ListCategory extends React.Component {
             />
           </View>
 
-          <Table style={styles.table}>
-            <Row
-              style={styles.tableHead}
-              data={DUMMY_DATA.tableHead}
-              flexArr={DUMMY_DATA.tableFlex}
-              textStyle={styles.tableHeadText}
-            />
+          <View style={[styles.tableHead, styles.table, { flexDirection: 'row' }]}>
+            <Text style={[styles.tableHeadText, { flex: 0.5 }]}>#</Text>
+            <Text style={[styles.tableHeadText, { flex: 3 }]}>Category</Text>
+            <Text style={[styles.tableHeadText, { flex: 1 }]}>Action</Text>
+          </View>
 
-            {(category?.data ?? []).map((rowData, index) => (
-              <TableWrapper key={index} style={styles.tableRow}>
-                <Cell
-                  textStyle={styles.tableText}
-                  flex={DUMMY_DATA.tableFlex[0]}
-                  data={this._renderCustom(index + 1, 0, index)}
-                />
-                <Cell
-                  textStyle={styles.tableText}
-                  flex={DUMMY_DATA.tableFlex[1]}
-                  data={this._renderCustom(rowData.name, 1, index)}
-                />
-                <Cell
-                  textStyle={styles.tableText}
-                  flex={DUMMY_DATA.tableFlex[2]}
-                  data={this._renderCustom(rowData, 2, index)}
-                />
-              </TableWrapper>
-            ))}
-          </Table>
+          <FlatList
+            data={category?.data ?? []}
+            keyExtractor={(_, idx) => `item-${idx}`}
+            renderItem={this._renderItem}
+          />
         </View>
       </View>
     );

@@ -8,8 +8,9 @@ import style from './styles';
 
 const Component = ({
   label,
+  inputStyle,
   meta: { touched, error },
-  input: { onChange, inputStyle, ...restInput },
+  input: { onChange, ...restInput },
   ...rest
 }) => {
   return (
@@ -36,10 +37,15 @@ const Component = ({
   );
 };
 
+Component.defaultProps = {
+  inputStyle: {}
+};
+
 Component.propTypes = {
   label: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
-  input: PropTypes.object.isRequired
+  input: PropTypes.object.isRequired,
+  inputStyle: PropTypes.object
 };
 
 export default Component;

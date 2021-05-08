@@ -16,24 +16,14 @@ const Component = props => {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={style.inputContainer}>
-        <Field
-          component={InputField}
-          name="product_name"
-          input={{ placeholder: 'Product Name' }}
-          label="Product Name"
-        />
-        <Field component={InputField} name="price" label="Price" input={{ placeholder: 'Price' }} />
+        <Field component={InputField} name="product_name" placeholder="Product Name" label="Product Name" />
+        <Field component={InputField} name="price" label="Price" placeholder="Price" />
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 1, marginRight: 15 }}>
-            <Field component={InputField} name="stock" input={{ placeholder: 'Stock' }} label="Stock" />
+            <Field component={InputField} name="stock" placeholder="Stock" label="Stock" />
           </View>
           <View style={{ flex: 1 }}>
-            <Field
-              component={InputField}
-              name="discount"
-              input={{ placeholder: 'Discount' }}
-              label="Discount"
-            />
+            <Field component={InputField} name="discount" placeholder="Discount" label="Discount" />
           </View>
 
           <View style={{ flex: 1 }} />
@@ -42,11 +32,9 @@ const Component = props => {
           component={InputField}
           name="description"
           label="Description"
-          input={{
-            placeholder: 'Description',
-            multiline: true,
-            inputStyle: { height: 150, textAlignVertical: 'top' }
-          }}
+          placeholder="Description"
+          multiline
+          inputStyle={{ height: 150, textAlignVertical: 'top' }}
         />
       </ScrollView>
 

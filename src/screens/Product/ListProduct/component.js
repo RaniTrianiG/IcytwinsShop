@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
 import { Button } from 'react-native-elements';
-import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
 
 import PropTypes from 'prop-types';
 
@@ -13,19 +12,22 @@ import { SCREENS } from '../../../constants';
 
 import styles from './styles';
 
-const DUMMY_DATA = {
-  tableFlex: [0.5, 2, 1, 1.1, 1],
-  tableHead: ['#', 'Name', 'Stock', 'Category', 'Action'],
-  tableData: []
-};
-
 class ListProduct extends React.Component {
-  _handleViewDetail = () => () => {
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.getData();
+  }
+
+  _handleViewDetail = data => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
       component: {
         name: SCREENS.DETAIL_PRODUCT,
+        passProps: {
+          selectedData: data
+        },
         options: {
           statusBar: {
             style: 'dark',
@@ -58,8 +60,8 @@ class ListProduct extends React.Component {
     </View>
   );
 
-  _renderActions = (_, index) => (
-    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(index)}>
+  _renderActions = data => (
+    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(data)}>
       <Text style={[styles.tableText, { textDecorationLine: 'underline' }]}>View</Text>
     </TouchableOpacity>
   );
@@ -76,7 +78,19 @@ class ListProduct extends React.Component {
     return cellData;
   };
 
+  _renderItem = ({ item, index }) => (
+    <View style={[styles.tableRow, { flexDirection: 'row' }]}>
+      <Text style={[styles.tableText, { flex: 0.5 }]}>{index + 1}</Text>
+      <Text style={[styles.tableText, { flex: 2 }]}>{item?.name ?? ''}</Text>
+      <Text style={[styles.tableHeadText, { flex: 1 }]}>{item?.stock ?? ''}</Text>
+      <Text style={[styles.tableHeadText, { flex: 2 }]}>{item?.category?.name ?? ''}</Text>
+      <View style={{ flex: 1 }}>{this._renderActions(item)}</View>
+    </View>
+  );
+
   render() {
+    const { product } = this.props;
+
     return (
       <View style={styles.container}>
         <Navbar />
@@ -93,27 +107,19 @@ class ListProduct extends React.Component {
             />
           </View>
 
-          <Table style={styles.table}>
-            <Row
-              style={styles.tableHead}
-              data={DUMMY_DATA.tableHead}
-              flexArr={DUMMY_DATA.tableFlex}
-              textStyle={styles.tableHeadText}
-            />
+          <View style={[styles.tableHead, styles.table, { flexDirection: 'row' }]}>
+            <Text style={[styles.tableHeadText, { flex: 0.5 }]}>#</Text>
+            <Text style={[styles.tableHeadText, { flex: 2 }]}>Name</Text>
+            <Text style={[styles.tableHeadText, { flex: 1 }]}>Stock</Text>
+            <Text style={[styles.tableHeadText, { flex: 2 }]}>Category</Text>
+            <Text style={[styles.tableHeadText, { flex: 1 }]}>Action</Text>
+          </View>
 
-            {DUMMY_DATA.tableData.map((rowData, index) => (
-              <TableWrapper key={index} style={styles.tableRow}>
-                {rowData.map((cellData, cellIndex) => (
-                  <Cell
-                    key={cellIndex}
-                    textStyle={styles.tableText}
-                    flex={DUMMY_DATA.tableFlex[cellIndex]}
-                    data={this._renderCustom(cellData, cellIndex, index)}
-                  />
-                ))}
-              </TableWrapper>
-            ))}
-          </Table>
+          <FlatList
+            data={product?.data ?? []}
+            keyExtractor={(_, idx) => `item-${idx}`}
+            renderItem={this._renderItem}
+          />
         </View>
       </View>
     );
@@ -121,13 +127,15 @@ class ListProduct extends React.Component {
 }
 
 ListProduct.defaultProps = {
-  componentId: 'listproductscreen'
-  // actions: {}
+  componentId: 'listproductscreen',
+  actions: {},
+  product: {}
 };
 
 ListProduct.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object,
+  product: PropTypes.object
 };
 
 export default ListProduct;

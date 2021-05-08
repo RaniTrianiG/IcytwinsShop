@@ -29,7 +29,7 @@ class DetailProduct extends React.Component {
 
         <View style={styles.content}>
           <DetailProductForm
-            handleSubmit={this._handleSubmit}
+            onSubmit={this._handleSubmit}
             handleBack={this._handleBack}
             handleDelete={this._handleDelete}
           />
