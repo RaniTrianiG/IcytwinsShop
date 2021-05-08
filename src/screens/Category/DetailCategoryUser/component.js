@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Image, Text, ScrollView, Linking } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 import { Button } from 'react-native-elements';
@@ -77,6 +77,10 @@ class DetailCategoryUser extends React.Component {
     Navigation.pop(componentId);
   };
 
+  openWA = () => {
+    Linking.openURL('https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0')
+  }
+
   render() {
     // const { selectedData, profile } = this.props;
 
@@ -112,7 +116,7 @@ class DetailCategoryUser extends React.Component {
             </View>
             <View style={{ justifyContent: 'space-between' }}>
               <View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.openWA}>
                   <Text style={{ fontSize: 18, fontFamily: 'serif', fontWeight: 'bold' }}>Customer Service</Text>
                 </TouchableOpacity>
               </View>
