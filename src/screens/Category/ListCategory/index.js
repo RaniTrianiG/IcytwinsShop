@@ -5,7 +5,7 @@ import Component from './component';
 
 const mapStateToProps = state => {
   return {
-    ...state.home
+    ...state.category
   };
 };
 

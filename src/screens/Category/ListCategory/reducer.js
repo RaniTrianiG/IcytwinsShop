@@ -2,21 +2,15 @@ import { ACTIONS } from '../../../constants';
 import { objectUpdater } from '../../../utils';
 
 const initialState = {
-  isLoading: false,
-  error: null,
-  data: null
+  category: null
 };
 
 const reducers = (state = initialState, action) => {
-  const { data, error } = action;
+  const { data } = action;
 
   switch (action.type) {
-    case ACTIONS.GET_HOME_START:
-      return objectUpdater(state, { isLoading: true });
-    case ACTIONS.GET_HOME_SUCCESS:
-      return objectUpdater(state, { isLoading: false, data });
-    case ACTIONS.GET_HOME_FAILED:
-      return objectUpdater(state, { isLoading: false, error });
+    case ACTIONS.GET_CATEGORY_SUCCESS:
+      return objectUpdater(state, { category: data });
     default:
       return state;
   }

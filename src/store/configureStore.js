@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import appReducers from '../reducers';
 
 const rootReducer = (state, action) => {
-  if (action.type === 'AUTH_OUT') {
+  if (action.type === 'AUTH_LOGOUT_SUCCESS') {
     state = undefined;
   }
   return appReducers(state, action);

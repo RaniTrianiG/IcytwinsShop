@@ -11,7 +11,7 @@ export const postRegister = (data, successCallback) => async dispatch => {
 
   const options = {
     method: 'post',
-    headers: defaultOpt,
+    headers: defaultOpt.headers,
     ...(data ? { body: JSON.stringify(data) } : null)
   };
 

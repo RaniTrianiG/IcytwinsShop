@@ -11,12 +11,17 @@ import InputField from '../../elements/TextInput';
 import style from './styles';
 
 const Component = props => {
-  const { handleSubmit, handleBack, handleDelete } = props;
+  const { data, handleSubmit, handleBack, handleDelete } = props;
 
   return (
     <View style={{ flex: 1 }}>
       <View style={style.inputContainer}>
-        <Field component={InputField} name="category" placeholder="Category Name" label="Category Name" />
+        <Field
+          component={InputField}
+          name="category"
+          placeholder={data?.name ?? 'Category Name'}
+          label="Category Name"
+        />
       </View>
 
       <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
@@ -48,10 +53,15 @@ const Component = props => {
   );
 };
 
+Component.defaultProps = {
+  data: {}
+};
+
 Component.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired
+  handleBack: PropTypes.func.isRequired,
+  data: PropTypes.object
 };
 
 export default Component;

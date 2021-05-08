@@ -15,17 +15,25 @@ import styles from './styles';
 
 const DUMMY_DATA = {
   tableFlex: [0.5, 3, 1],
-  tableHead: ['#', 'Category', 'Action'],
-  tableData: [['1', 'Bouquet', ''], ['2', 'Bouquet', '']]
+  tableHead: ['#', 'Category', 'Action']
 };
 
 class ListCategory extends React.Component {
-  _handleViewDetail = () => () => {
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.getData();
+  }
+
+  _handleViewDetail = data => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
       component: {
         name: SCREENS.DETAIL_CATEGORY,
+        passProps: {
+          selectedData: data
+        },
         options: {
           statusBar: {
             style: 'dark',
@@ -58,8 +66,8 @@ class ListCategory extends React.Component {
     </View>
   );
 
-  _renderActions = (_, index) => (
-    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(index)}>
+  _renderActions = data => (
+    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(data)}>
       <Text style={[styles.tableText, { textDecorationLine: 'underline' }]}>View</Text>
     </TouchableOpacity>
   );
@@ -73,6 +81,8 @@ class ListCategory extends React.Component {
   };
 
   render() {
+    const { category } = this.props;
+
     return (
       <View style={styles.container}>
         <Navbar />
@@ -97,16 +107,23 @@ class ListCategory extends React.Component {
               textStyle={styles.tableHeadText}
             />
 
-            {DUMMY_DATA.tableData.map((rowData, index) => (
+            {(category?.data ?? []).map((rowData, index) => (
               <TableWrapper key={index} style={styles.tableRow}>
-                {rowData.map((cellData, cellIndex) => (
-                  <Cell
-                    key={cellIndex}
-                    textStyle={styles.tableText}
-                    flex={DUMMY_DATA.tableFlex[cellIndex]}
-                    data={this._renderCustom(cellData, cellIndex, index)}
-                  />
-                ))}
+                <Cell
+                  textStyle={styles.tableText}
+                  flex={DUMMY_DATA.tableFlex[0]}
+                  data={this._renderCustom(index + 1, 0, index)}
+                />
+                <Cell
+                  textStyle={styles.tableText}
+                  flex={DUMMY_DATA.tableFlex[1]}
+                  data={this._renderCustom(rowData.name, 1, index)}
+                />
+                <Cell
+                  textStyle={styles.tableText}
+                  flex={DUMMY_DATA.tableFlex[2]}
+                  data={this._renderCustom(rowData, 2, index)}
+                />
               </TableWrapper>
             ))}
           </Table>
@@ -117,13 +134,15 @@ class ListCategory extends React.Component {
 }
 
 ListCategory.defaultProps = {
-  componentId: 'listcategoryscreen'
-  // actions: {}
+  componentId: 'listcategoryscreen',
+  actions: {},
+  category: {}
 };
 
 ListCategory.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object,
+  category: PropTypes.object
 };
 
 export default ListCategory;

@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './action';
+import * as categoryAction from '../ListCategory/action';
 import Component from './component';
 
 const mapStateToProps = state => {
   return {
-    ...state.home
+    ...state.category
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators({ ...actions, ...categoryAction }, dispatch)
   };
 };
 

@@ -1,26 +1,36 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-boolean-value */
 import React from 'react';
-import { View, Text, Image, ScrollView, ImageBackground, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
+import { API } from 'react-native-dotenv';
 
 import PropTypes from 'prop-types';
 import { SCREENS } from '../../../constants';
 
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
+import Banner from '../../../assets/png/banner.png';
 
 import styles from './styles';
 
-const DUMMY_DATA = [{}, {}, {}, {}, {}];
-
 class Home extends React.Component {
-  _navigateToDetail = () => {
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.getData();
+  }
+
+  _navigateToDetail = item => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
       component: {
         name: SCREENS.USER_DETAIL_PRODUCT,
+        passProps: {
+          selectedProduct: item
+        },
         options: {
           statusBar: {
             style: 'dark',
@@ -59,23 +69,38 @@ class Home extends React.Component {
     });
   };
 
-  _renderItem = () => (
-    <TouchableOpacity
-      onPress={this._navigateToDetail}
-      style={{ width: 150, aspectRatio: 1, backgroundColor: '#aaa', marginRight: 16, borderRadius: 5 }}
-    >
-      <View>
-        <Image />
-      </View>
-    </TouchableOpacity>
-  );
+  _renderItem = ({ item }) => {
+    const thumbnail = item.imgs.find(({ is_thumbnail }) => is_thumbnail);
+    const imgUrl = `${API}/storage/${item.id}/${thumbnail?.img ?? ''}`;
+
+    return (
+      <TouchableOpacity
+        onPress={this._navigateToDetail(item)}
+        style={{
+          overflow: 'hidden',
+          width: 150,
+          aspectRatio: 1,
+          backgroundColor: '#aaa',
+          marginRight: 16,
+          borderRadius: 5
+        }}
+      >
+        <Image
+          style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+          source={{ uri: imgUrl }}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   render() {
+    const { data } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <ScrollView nestedScrollEnabled={true}>
-            <ImageBackground
+            <View
               style={{
                 width: '100%',
                 height: 534,
@@ -86,6 +111,17 @@ class Home extends React.Component {
                 alignItems: 'flex-start'
               }}
             >
+              <View style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }}>
+                <Image source={Banner} style={{ width: null, height: null, resizeMode: 'cover', flex: 1 }} />
+              </View>
+
+              <TouchableOpacity
+                onPress={this._handleTabBtnPress(SCREENS.REGISTER)}
+                style={{ position: 'absolute', top: 12, right: 12 }}
+              >
+                <Text style={{ fontSize: 14, fontWeight: '700', color: '#fff' }}>Log Out</Text>
+              </TouchableOpacity>
+
               <Text style={{ fontSize: 48, lineHeight: 59, fontWeight: 'bold', color: '#ffff' }}>
                 Bouqet sale
               </Text>
@@ -105,7 +141,7 @@ class Home extends React.Component {
                   Check
                 </Text>
               </TouchableOpacity>
-            </ImageBackground>
+            </View>
 
             <View>
               <View
@@ -122,7 +158,7 @@ class Home extends React.Component {
               <FlatList
                 horizontal={true}
                 nestedScrollEnabled={true}
-                data={DUMMY_DATA}
+                data={data?.data ?? []}
                 keyExtractor={(_, idx) => `item-${idx}`}
                 renderItem={this._renderItem}
                 showsHorizontalScrollIndicator={false}
@@ -171,13 +207,15 @@ class Home extends React.Component {
 }
 
 Home.defaultProps = {
-  componentId: 'usehomescreen'
-  // actions: {}
+  componentId: 'usehomescreen',
+  actions: {},
+  data: {}
 };
 
 Home.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object,
+  data: PropTypes.object
 };
 
 export default Home;

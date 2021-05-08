@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './action';
+import { getProfile } from '../../Login/action';
 import Component from './component';
 
 const mapStateToProps = state => {
   return {
-    ...state.home
+    ...state.home,
+    ...state.login
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators({ ...actions, getProfile }, dispatch)
   };
 };
 

@@ -16,12 +16,7 @@ import styles from './styles';
 const DUMMY_DATA = {
   tableFlex: [0.5, 2, 1, 1.1, 1],
   tableHead: ['#', 'Name', 'Stock', 'Category', 'Action'],
-  tableData: [
-    ['1', 'Bouquet', '12', 'Bouquet', ''],
-    ['2', 'Bouquet', '12', 'Bouquet', ''],
-    ['3', 'Bouquet', '12', 'Bouquet', ''],
-    ['4', 'Bouquet', '12', 'Bouquet', '']
-  ]
+  tableData: []
 };
 
 class ListProduct extends React.Component {

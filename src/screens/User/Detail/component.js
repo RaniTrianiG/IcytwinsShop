@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-boolean-value */
 import React from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
+import { API } from 'react-native-dotenv';
 
 import PropTypes from 'prop-types';
 
@@ -27,7 +29,25 @@ class Detail extends React.Component {
     </TouchableOpacity>
   );
 
+  _addToCart = () => {
+    const { actions, selectedProduct } = this.props;
+
+    actions.addToCart({ product_id: selectedProduct.id, qty: 1 }, () => {
+      ToastAndroid.showWithGravityAndOffset(
+        'Success Add To Cart',
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM,
+        25,
+        50
+      );
+    });
+  };
+
   render() {
+    const { selectedProduct } = this.props;
+    const thumbnail = selectedProduct.imgs.find(({ is_thumbnail }) => is_thumbnail);
+    const imgUrl = `${API}/storage/${selectedProduct.id}/${thumbnail?.img ?? ''}`;
+
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -49,7 +69,7 @@ class Detail extends React.Component {
                   paddingHorizontal: 10
                 }}
               >
-                Bouqet
+                {selectedProduct?.name ?? ''}
               </Text>
               <View style={{ width: 24 }} />
             </View>
@@ -58,27 +78,24 @@ class Detail extends React.Component {
               style={{
                 width: '100%',
                 height: 420,
-                backgroundColor: '#aaaaaa',
-                justifyContent: 'flex-end',
-                paddingVertical: 32,
-                paddingHorizontal: 12,
-                alignItems: 'flex-start'
+                backgroundColor: '#aaaaaa'
               }}
             >
-              <Image />
+              <Image
+                source={{ uri: imgUrl }}
+                style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
+              />
             </View>
 
             <View style={{ paddingHorizontal: 16, paddingVertical: 22 }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ flex: 1, fontSize: 24, fontWeight: 'bold' }}>Bouqet</Text>
-                <Text style={{ fontSize: 24, fontWeight: 'bold' }}>200.000</Text>
+                <Text style={{ flex: 1, fontSize: 24, fontWeight: 'bold' }}>
+                  {selectedProduct?.name ?? ''}
+                </Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{selectedProduct?.price ?? '-'}</Text>
               </View>
               <Text style={{ fontWeight: '300', color: '#9B9B9B', fontSize: 11 }}>Short black dress</Text>
-              <Text style={{ fontSize: 14, marginTop: 8 }}>
-                Sweet Bouqet for your beloved can contain from snacks, makeup, skincare, and even flowers be
-                it dry or ordinary flowers , frill-trimmed square neckline with concealed elastication.
-                Elasticated seam under the bust and short puff sleeves with a small frill trim.
-              </Text>
+              <Text style={{ fontSize: 14, marginTop: 8 }}>{selectedProduct?.description ?? ''}</Text>
             </View>
             <View />
           </ScrollView>
@@ -97,6 +114,7 @@ class Detail extends React.Component {
               paddingVertical: 14,
               borderRadius: 50
             }}
+            onPress={this._addToCart}
           >
             <Text
               style={{
@@ -118,13 +136,15 @@ class Detail extends React.Component {
 }
 
 Detail.defaultProps = {
-  componentId: 'userdetailproductscreen'
-  // actions: {}
+  componentId: 'userdetailproductscreen',
+  selectedProduct: {},
+  actions: {}
 };
 
 Detail.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  selectedProduct: PropTypes.object,
+  actions: PropTypes.object
 };
 
 export default Detail;

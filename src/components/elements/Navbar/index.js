@@ -19,7 +19,7 @@ const MENU = [
   { name: 'Master Data' },
   { name: 'Product', route: SCREENS.PRODUCT },
   { name: 'Category', route: SCREENS.CATEGORY },
-  { name: 'Sub Category', route: SCREENS.SUB_CATEGORY },
+  // { name: 'Sub Category', route: SCREENS.SUB_CATEGORY },
   { name: 'Transaction' },
   { name: 'Payment Confirmation', route: SCREENS.TRANSACTION },
   { name: 'Process Needed', route: SCREENS.TRANSACTION },

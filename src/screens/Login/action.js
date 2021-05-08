@@ -24,11 +24,14 @@ export const postLogin = (body, successCallback) => async dispatch => {
       }))
     )
     .then(res => {
-      const { data } = res;
-      AsyncStorage.setItem('user-token', data.access_token);
+      const { data, httpStatus } = res;
 
-      dispatch({ type: ACTIONS.POST_LOGIN_SUCCESS, data: data.access_token });
-      successCallback(res);
+      if (httpStatus === 200) {
+        AsyncStorage.setItem('user-token', data.access_token);
+
+        dispatch({ type: ACTIONS.POST_LOGIN_SUCCESS, data: data.access_token });
+        successCallback(res);
+      }
     })
     .catch(error => {
       dispatch({ type: ACTIONS.POST_LOGIN_FAILED, error });

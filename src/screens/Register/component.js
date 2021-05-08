@@ -24,7 +24,7 @@ class Login extends React.Component {
         ...data,
         password_confirmation: data.password,
         username: data.name.replace(/ /g, '').toLowerCase(),
-        role: 1,
+        role: 0,
         phone_number: ''
       },
       this._handleLogin
