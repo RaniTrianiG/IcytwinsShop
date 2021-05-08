@@ -14,7 +14,7 @@ import { SCREENS } from '../../../constants';
 import styles from './styles';
 import { ScrollView } from 'react-native';
 
-class CategoryUser extends React.Component {
+class DetailCategoryUser extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
 
@@ -79,7 +79,7 @@ class CategoryUser extends React.Component {
               buttonStyle={styles.button}
               titleStyle={styles.buttonText}
             />
-            <TouchableOpacity onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)} style={styles.category}>
+            <TouchableOpacity style={styles.category}>
               <View style={styles.titleCategory}>
                 <Text style={styles.menuLongNum}>Bouquet</Text>
               </View>
@@ -129,16 +129,16 @@ class CategoryUser extends React.Component {
   }
 }
 
-CategoryUser.defaultProps = {
+DetailCategoryUser.defaultProps = {
   componentId: 'categoryuserscreen',
   selectedData: {},
   actions: {}
 };
 
-CategoryUser.propTypes = {
+DetailCategoryUser.propTypes = {
   componentId: PropTypes.string,
   selectedData: PropTypes.object,
   actions: PropTypes.object
 };
 
-export default CategoryUser;
+export default DetailCategoryUser;

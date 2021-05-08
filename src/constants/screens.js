@@ -32,8 +32,8 @@ const screens = {
   USER_CART: 'app.user.cart',
 
   PROFILE: 'app.profile',
-  PROFILE_USER: 'app.user.profileuser'
-
+  PROFILE_USER: 'app.user.profileuser',
+  DETAIL_CATEGORY_USER: 'app.category.detailcategoryuser'
 };
 
 export default screens;
