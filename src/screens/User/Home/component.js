@@ -12,7 +12,7 @@ import { SCREENS } from '../../../constants';
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import Banner from '../../../assets/png/banner.png';
-import IconUser from '../../../assets/png/iconUser.png';
+import IconUser from '../../../assets/png/icon-user.png';
 
 import styles from './styles';
 
@@ -32,6 +32,22 @@ class Home extends React.Component {
         passProps: {
           selectedProduct: item
         },
+        options: {
+          statusBar: {
+            style: 'dark',
+            backgroundColor: '#F9F9F9'
+          }
+        }
+      }
+    });
+  };
+
+  _navigateToCategory = () => {
+    const { componentId } = this.props;
+
+    Navigation.push(componentId, {
+      component: {
+        name: SCREENS.CATEGORYUSER,
         options: {
           statusBar: {
             style: 'dark',
@@ -128,7 +144,7 @@ class Home extends React.Component {
               </Text>
 
               <TouchableOpacity
-              onPress={this._handleTabBtnPress(SCREENS.CATEGORYUSER)}
+                onPress={this._navigateToCategory}
                 style={{
                   backgroundColor: '#DB3022',
                   minWidth: 160,
@@ -207,7 +223,10 @@ class Home extends React.Component {
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
-              <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconUser} />
+              <Image
+                style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+                source={IconUser}
+              />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Profile</Text>
           </TouchableOpacity>

@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text } from 'react-native';
+import { View, TouchableOpacity, Image, Text, ScrollView } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
-import BackIcon from '../../../assets/png/icon-back.png';
+import { Button } from 'react-native-elements';
 
 import PropTypes from 'prop-types';
+
+import BackIcon from '../../../assets/png/icon-back.png';
+
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import productImage from '../../../assets/png/product.png';
-import IconUser from '../../../assets/png/iconUser.png';
-import { Button } from 'react-native-elements';
+import IconUser from '../../../assets/png/icon-user.png';
 import { SCREENS } from '../../../constants';
 import styles from './styles';
-import { ScrollView } from 'react-native';
 
 class CategoryUser extends React.Component {
   componentDidMount() {
@@ -49,10 +50,25 @@ class CategoryUser extends React.Component {
     });
   };
 
-  _handleSubmit = data => {
-    const { actions, selectedData } = this.props;
+  _navigateToDetailCategory = () => {
+    const { componentId } = this.props;
 
-    actions.getData();
+    Navigation.push(componentId, {
+      component: {
+        name: SCREENS.DETAIL_CATEGORY_USER,
+        options: {
+          statusBar: {
+            style: 'dark',
+            backgroundColor: '#F9F9F9'
+          }
+        }
+      }
+    });
+  };
+
+  _handleSubmit = () => {
+    // const { actions, selectedData } = this.props;
+    // actions.getData();
   };
 
   _handleBack = () => {
@@ -62,14 +78,13 @@ class CategoryUser extends React.Component {
   };
 
   render() {
-    const { selectedData, profile } = this.props;
+    // const { selectedData, profile } = this.props;
 
     return (
-
       <View style={styles.container}>
-        <View style={styles.loginScreen}>
+        <View style={styles.content}>
           <ScrollView>
-            <TouchableOpacity onPress={this._handleTabBtnPress(SCREENS.USER_HOME)} style={styles.back}>
+            <TouchableOpacity onPress={this._handleBack} style={styles.back}>
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
@@ -79,7 +94,7 @@ class CategoryUser extends React.Component {
               buttonStyle={styles.button}
               titleStyle={styles.buttonText}
             />
-            <TouchableOpacity onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)} style={styles.category}>
+            <TouchableOpacity onPress={this._navigateToDetailCategory} style={styles.category}>
               <View style={styles.titleCategory}>
                 <Text style={styles.menuLongNum}>Bouquet</Text>
               </View>
@@ -89,12 +104,10 @@ class CategoryUser extends React.Component {
             </TouchableOpacity>
           </ScrollView>
         </View>
-        <View
-          style={styles.bar}
-        >
+        <View style={styles.bar}>
           <TouchableOpacity
-            disabled={true}
-            onPress={this._handleTabBtnPress(SCREENS.USER_HOME)}
+            disabled
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -106,7 +119,7 @@ class CategoryUser extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.USER_CART)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -115,11 +128,14 @@ class CategoryUser extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.PROFILE_USER)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.PROFILE_USER })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
-              <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconUser} />
+              <Image
+                style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+                source={IconUser}
+              />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Profile</Text>
           </TouchableOpacity>
@@ -131,13 +147,13 @@ class CategoryUser extends React.Component {
 
 CategoryUser.defaultProps = {
   componentId: 'categoryuserscreen',
-  selectedData: {},
+  // selectedData: {},
   actions: {}
 };
 
 CategoryUser.propTypes = {
   componentId: PropTypes.string,
-  selectedData: PropTypes.object,
+  // selectedData: PropTypes.object,
   actions: PropTypes.object
 };
 

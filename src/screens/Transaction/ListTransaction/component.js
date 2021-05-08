@@ -1,26 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
-import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
-
 import PropTypes from 'prop-types';
 
-import { ScrollView } from 'react-native';
 import Navbar from '../../../components/elements/Navbar';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
-
-const DUMMY_DATA = {
-  tableFlex: [0.5, 1, 2, 1.2, 1],
-  tableHead: ['#', 'Invoice', 'Total', 'Status', 'Action'],
-  tableData: [
-    ['1', 'INV-XX', 'Rp. 120.000,00', 'Payment Confirmation', ''],
-    ['2', 'INV-XX', 'Rp. 120.000,00', 'Process Needed', '']
-  ]
-};
 
 class ListProduct extends React.Component {
   componentDidMount() {
@@ -64,8 +52,21 @@ class ListProduct extends React.Component {
     return statusText[status];
   };
 
+  _renderItem = ({ item, index }) => {
+    return (
+      <View style={[styles.tableRow, { flexDirection: 'row' }]}>
+        <Text style={[styles.tableText, { flex: 0.5 }]}>{index + 1}</Text>
+        <Text style={[styles.tableText, { flex: 1.5 }]}>{item?.invoice ?? ''}</Text>
+        <Text style={[styles.tableText, { flex: 1.5 }]}>{item?.total ?? ''}</Text>
+        <Text style={[styles.tableText, { flex: 1.5 }]}>{this._renderStatus(item?.status ?? 0)}</Text>
+        <View style={{ flex: 1 }}>{this._renderActions(item)}</View>
+      </View>
+    );
+  };
+
   render() {
     const { transactions, profile } = this.props;
+
     return (
       <View style={styles.container}>
         <Navbar
@@ -81,30 +82,19 @@ class ListProduct extends React.Component {
         <View style={styles.content}>
           <Text style={styles.title}>Transaction</Text>
 
-          <ScrollView>
-            <Table style={styles.table}>
-              <Row
-                style={styles.tableHead}
-                data={DUMMY_DATA.tableHead}
-                flexArr={DUMMY_DATA.tableFlex}
-                textStyle={styles.tableHeadText}
-              />
+          <View style={[styles.tableHead, styles.table, { flexDirection: 'row' }]}>
+            <Text style={[styles.tableHeadText, { flex: 0.5 }]}>#</Text>
+            <Text style={[styles.tableHeadText, { flex: 1.5 }]}>Invoice</Text>
+            <Text style={[styles.tableHeadText, { flex: 1.5 }]}>Total</Text>
+            <Text style={[styles.tableHeadText, { flex: 1.5 }]}>Status</Text>
+            <Text style={[styles.tableHeadText, { flex: 1 }]}>Action</Text>
+          </View>
 
-              {transactions?.map((rowData, index) => (
-                <TableWrapper key={index} style={styles.tableRow}>
-                  <Cell key={rowData.id} textStyle={styles.tableText} flex={0.5} data={rowData.id} />
-                  <Cell textStyle={styles.tableText} flex={1.5} data={`#${rowData.invoice}`} />
-                  <Cell textStyle={styles.tableText} flex={2} data={rowData.total} />
-                  <Cell textStyle={styles.tableText} flex={1.2} data={this._renderStatus(rowData.status)} />
-                  <Cell
-                    textStyle={styles.tableText}
-                    flex={1.2}
-                    data={this._renderActions(rowData.id, index)}
-                  />
-                </TableWrapper>
-              ))}
-            </Table>
-          </ScrollView>
+          <FlatList
+            data={transactions ?? []}
+            keyExtractor={(_, idx) => `item-${idx}`}
+            renderItem={this._renderItem}
+          />
         </View>
       </View>
     );
@@ -114,13 +104,15 @@ class ListProduct extends React.Component {
 ListProduct.defaultProps = {
   componentId: 'listproductscreen',
   actions: {},
-  transactions: {}
+  transactions: [],
+  profile: {}
 };
 
 ListProduct.propTypes = {
   componentId: PropTypes.string,
   actions: PropTypes.object,
-  transactions: PropTypes.object
+  transactions: PropTypes.array,
+  profile: PropTypes.object
 };
 
 export default ListProduct;

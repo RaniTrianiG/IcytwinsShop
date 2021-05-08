@@ -74,7 +74,17 @@ class ListCategory extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data?.name?.split(" ").map((i) => i[0]).join("").substring(0, 2) ?? null} />
+        <Navbar
+          fullName={profile?.data?.name ?? null}
+          mail={profile?.data.email ?? null}
+          initialName={
+            profile?.data?.name
+              ?.split(' ')
+              .map(i => i[0])
+              .join('')
+              .substring(0, 2) ?? null
+          }
+        />
 
         <View style={styles.content}>
           <Text style={styles.title}>Category</Text>
@@ -108,13 +118,15 @@ class ListCategory extends React.Component {
 ListCategory.defaultProps = {
   componentId: 'listcategoryscreen',
   actions: {},
-  category: {}
+  category: {},
+  profile: {}
 };
 
 ListCategory.propTypes = {
   componentId: PropTypes.string,
   actions: PropTypes.object,
-  category: PropTypes.object
+  category: PropTypes.object,
+  profile: PropTypes.object
 };
 
 export default ListCategory;

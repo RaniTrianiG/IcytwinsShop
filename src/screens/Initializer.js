@@ -35,31 +35,33 @@ class Initializer extends Component {
   async _checkCredential() {
     const token = await AsyncStorage.getItem('user-token');
 
-    return Navigation.setRoot({
-      root: {
-        stack: {
-          children: [
-            {
-              component: {
-                name: token ? SCREENS.HOME : SCREENS.REGISTER,
-                options: {
-                  statusBar: {
-                    style: 'dark',
-                    backgroundColor: '#F9F9F9',
-                    drawBehind: false
+    setTimeout(() => {
+      Navigation.setRoot({
+        root: {
+          stack: {
+            children: [
+              {
+                component: {
+                  name: token ? SCREENS.HOME : SCREENS.REGISTER,
+                  options: {
+                    statusBar: {
+                      style: 'dark',
+                      backgroundColor: '#F9F9F9',
+                      drawBehind: false
+                    }
                   }
                 }
               }
-            }
-          ],
-          options: {
-            topBar: {
-              visible: false
+            ],
+            options: {
+              topBar: {
+                visible: false
+              }
             }
           }
         }
-      }
-    });
+      });
+    }, 2000);
   }
 
   render() {

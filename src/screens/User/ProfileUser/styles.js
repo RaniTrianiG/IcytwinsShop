@@ -3,15 +3,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   back: {
     aspectRatio: 1,
-    marginLeft: 8,
     marginTop: 8,
     width: 24
-  },
-  img: {
-    flex: 1,
-    height: null,
-    resizeMode: 'contain',
-    width: null
   },
   button: {
     backgroundColor: '#DB3022',
@@ -36,6 +29,21 @@ const styles = StyleSheet.create({
     marginTop: 13,
     paddingHorizontal: 26
   },
+  h1: {
+    fontFamily: 'serif',
+    fontSize: 20,
+    fontWeight: '700',
+    lineHeight: 23.85,
+    marginBottom: 19,
+    marginTop: 30
+  },
+
+  img: {
+    flex: 1,
+    height: null,
+    resizeMode: 'contain',
+    width: null
+  },
 
   table: {
     marginTop: 15
@@ -53,14 +61,6 @@ const styles = StyleSheet.create({
   },
   tableText: {
     fontSize: 15
-  },
-  h1: {
-    fontFamily: 'serif',
-    fontSize: 20,
-    fontWeight: '700',
-    lineHeight: 23.85,
-    marginBottom: 19,
-    marginTop: 30
   },
   title: {
     fontFamily: 'serif',

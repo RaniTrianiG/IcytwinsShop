@@ -9,7 +9,7 @@ import { SCREENS } from '../../../constants';
 
 import IconHome from '../../../assets/png/icon-home.png';
 import IconBag from '../../../assets/png/icon-bag-red.png';
-import IconUser from '../../../assets/png/iconUser.png';
+import IconUser from '../../../assets/png/icon-user.png';
 
 import styles from './styles';
 
@@ -93,6 +93,12 @@ class Detail extends React.Component {
     </View>
   );
 
+  _renderEmptyData = () => (
+    <View>
+      <Text>Cart is empty</Text>
+    </View>
+  );
+
   render() {
     const { profile } = this.props;
     const total = (profile?.data?.carts ?? []).reduce((val, item) => {
@@ -103,10 +109,11 @@ class Detail extends React.Component {
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <FlatList
-            data={profile?.data?.carts ?? []}
+            data={[]}
             contentContainerStyle={{ paddingHorizontal: 16 }}
             keyExtractor={(_, idx) => `item-${idx}`}
             renderItem={this._renderItem}
+            ListEmptyComponent={this._renderEmptyData}
             ListHeaderComponent={
               <Text
                 style={{
@@ -196,12 +203,14 @@ class Detail extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Bag</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            disabled={true}
             onPress={this._handleTabBtnPress(SCREENS.PROFILE_USER)}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
-              <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconUser} />
+              <Image
+                style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+                source={IconUser}
+              />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Profile</Text>
           </TouchableOpacity>
