@@ -5,6 +5,7 @@ import { Navigation } from 'react-native-navigation';
 
 import { Button } from 'react-native-elements';
 import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
+import { ToastAndroid } from 'react-native';
 import FormProfile from '../../components/forms/Profile';
 
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ class Profile extends React.Component {
   };
 
   _handleFinishSubmit = res => {
-    alert('Sukses Merubah Data');
+    ToastAndroid.showWithGravityAndOffset('Profile updated!', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
   };
 
   handleNavigate = ({ route }) => () => {
