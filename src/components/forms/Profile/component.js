@@ -17,22 +17,17 @@ const Component = props => {
     <View>
       <View style={styles.inputContainer}>
         <Field component={InputField} name="name" placeholder="Full Name" label="Full Name" />
-        <Field
-          component={InputField}
-          name="email"
-          placeholder="Email"
-          label="Email"
-        />
+        <Field component={InputField} name="email" placeholder="Email" label="Email" disabled />
         <View style={styles.button}>
           <Text style={styles.buttonText}>Password</Text>
-          </View>
-          <View style={styles.viewChange}>
-              <Text style={styles.textChange}>Change</Text>
-          </View>
-          <View style={{ marginTop: 20 }}>
-            <Field
+        </View>
+        <View style={styles.viewChange}>
+          <Text style={styles.textChange}>Change</Text>
+        </View>
+        <View style={{ marginTop: 20 }}>
+          <Field
             component={InputField}
-            name="password"
+            name="old_password"
             placeholder="Old Password"
             label="Old Password"
             type="password"
@@ -45,9 +40,14 @@ const Component = props => {
             label="New Password"
             type="password"
             secureTextEntry
-          />  
-          </View>
-          <Button onPress={handleSubmit} title="UPDATE PROFILE" buttonStyle={styles.buttons} titleStyle={styles.buttonTexts} />
+          />
+        </View>
+        <Button
+          onPress={handleSubmit}
+          title="UPDATE PROFILE"
+          buttonStyle={styles.buttons}
+          titleStyle={styles.buttonTexts}
+        />
       </View>
     </View>
   );

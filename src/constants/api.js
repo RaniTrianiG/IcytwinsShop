@@ -5,6 +5,8 @@ const api = {
   DASHBOARD: '/api/dashboard',
   PROFILE: '/api/auth/profile',
 
+  USER: '/api/user',
+
   CATEGORY: '/api/category',
   PRODUCT: '/api/product',
 
