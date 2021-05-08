@@ -12,6 +12,7 @@ import { SCREENS } from '../../../constants';
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import Banner from '../../../assets/png/banner.png';
+import IconUser from '../../../assets/png/iconUser.png';
 
 import styles from './styles';
 
@@ -123,10 +124,11 @@ class Home extends React.Component {
               </TouchableOpacity>
 
               <Text style={{ fontSize: 48, lineHeight: 59, fontWeight: 'bold', color: '#ffff' }}>
-                Bouqet sale
+                Bouquet sale
               </Text>
 
               <TouchableOpacity
+              onPress={this._handleTabBtnPress(SCREENS.CATEGORYUSER)}
                 style={{
                   backgroundColor: '#DB3022',
                   minWidth: 160,
@@ -199,6 +201,15 @@ class Home extends React.Component {
               <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconBag} />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this._handleTabBtnPress(SCREENS.PROFILE_USER)}
+            style={{ alignItems: 'center' }}
+          >
+            <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
+              <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconUser} />
+            </View>
+            <Text style={{ fontSize: 10, lineHeight: 10 }}>Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
