@@ -1,7 +1,7 @@
 import validateInput from '../../../utils/validateInput';
 
 const validate = values => {
-  const { email, password } = values;
+  const { email, name } = values;
 
   const errors = {
     email: validateInput(email, [
@@ -14,10 +14,10 @@ const validate = values => {
         message: 'Incorrect email format'
       }
     ]),
-    password: validateInput(password, [
+    name: validateInput(name, [
       {
         rule: 'required',
-        message: 'Password required'
+        message: 'Name required'
       }
     ])
   };

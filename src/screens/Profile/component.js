@@ -20,12 +20,17 @@ class Profile extends React.Component {
 
     actions.getProfile();
   }
-  
-  _handleSubmit = () => {
-    handleNavigate({ route: SCREENS.PRODUCT });
-  }
 
-   handleNavigate = ({ route }) => () => {
+  _handleSubmit = data => {
+    const { actions } = this.props;
+    actions.postUpdateProfile(data, this._handleFinishSubmit);
+  };
+
+  _handleFinishSubmit = res => {
+    alert('Sukses Merubah Data');
+  };
+
+  handleNavigate = ({ route }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -57,13 +62,27 @@ class Profile extends React.Component {
     const { profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data?.name?.split(" ").map((i) => i[0]).join("").substring(0, 2) ?? null} />
+        <Navbar
+          fullName={profile?.data?.name ?? null}
+          mail={profile?.data.email ?? null}
+          initialName={
+            profile?.data?.name
+              ?.split(' ')
+              .map(i => i[0])
+              .join('')
+              .substring(0, 2) ?? null
+          }
+        />
 
         <View style={styles.content}>
           <Text style={styles.h1}>Settings</Text>
           <Text style={styles.title}>Personal Information</Text>
-          
-          <FormProfile onSubmit={this._handleSubmit} handleForget={this._handleForget} />
+
+          <FormProfile
+            initialValues={profile.data}
+            onSubmit={this._handleSubmit}
+            handleForget={this._handleForget}
+          />
         </View>
       </View>
     );
@@ -71,13 +90,13 @@ class Profile extends React.Component {
 }
 
 Profile.defaultProps = {
-  componentId: 'profilescreen'
-  // actions: {}
+  componentId: 'profilescreen',
+  actions: {}
 };
 
 Profile.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object
 };
 
 export default Profile;
