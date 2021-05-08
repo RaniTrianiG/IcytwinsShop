@@ -6,6 +6,7 @@ import homeReducer from '../screens/Home/reducer';
 import categoryReducer from '../screens/Category/ListCategory/reducer';
 import userHomeReducer from '../screens/User/Home/reducer';
 import userCartReducer from '../screens/User/Cart/reducer';
+import transactionReducer from '../screens/Transaction/ListTransaction/reducer';
 
 const appReducers = combineReducers({
   login: loginReducer,
@@ -14,6 +15,7 @@ const appReducers = combineReducers({
   home: homeReducer,
   category: categoryReducer,
   userHome: userHomeReducer,
-  cart: userCartReducer
+  cart: userCartReducer,
+  transaction: transactionReducer
 });
 export default appReducers;

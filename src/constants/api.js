@@ -9,7 +9,9 @@ const api = {
   PRODUCT: '/api/product',
 
   ADDTOCART: '/api/user/addtocart',
-  CHECKOUT: '/api/user/checkout'
+  CHECKOUT: '/api/user/checkout',
+
+  TRANSACTIONS: '/api/transaction'
 };
 
 export default api;

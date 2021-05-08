@@ -22,6 +22,11 @@ const DUMMY_DATA = {
 };
 
 class ListProduct extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getTransactions();
+  }
+
   _handleViewDetail = () => () => {
     const { componentId } = this.props;
 
@@ -50,19 +55,14 @@ class ListProduct extends React.Component {
     </TouchableOpacity>
   );
 
-  _renderCustom = (cellData, cellIndex, index) => {
-    if (cellIndex === 1) {
-      return this._renderNames(cellData, index);
-    }
+  _renderStatus = status => {
+    const statusText = ['New Order', 'Pending', 'Approved', 'Delivered', 'Canceled'];
 
-    if (cellIndex === 4) {
-      return this._renderActions(cellData, index);
-    }
-
-    return cellData;
+    return statusText[status];
   };
 
   render() {
+    const { transactions } = this.props;
     return (
       <View style={styles.container}>
         <Navbar />
@@ -78,16 +78,13 @@ class ListProduct extends React.Component {
               textStyle={styles.tableHeadText}
             />
 
-            {DUMMY_DATA.tableData.map((rowData, index) => (
+            {transactions?.map((rowData, index) => (
               <TableWrapper key={index} style={styles.tableRow}>
-                {rowData.map((cellData, cellIndex) => (
-                  <Cell
-                    key={cellIndex}
-                    textStyle={styles.tableText}
-                    flex={DUMMY_DATA.tableFlex[cellIndex]}
-                    data={this._renderCustom(cellData, cellIndex, index)}
-                  />
-                ))}
+                <Cell key={rowData.id} textStyle={styles.tableText} flex={0.5} data={rowData.id} />
+                <Cell textStyle={styles.tableText} flex={1} data={rowData.invoice} />
+                <Cell textStyle={styles.tableText} flex={2} data={rowData.total} />
+                <Cell textStyle={styles.tableText} flex={1.2} data={this._renderStatus(rowData.status)} />
+                <Cell textStyle={styles.tableText} flex={1.2} data={this._renderActions(rowData.id, index)} />
               </TableWrapper>
             ))}
           </Table>
@@ -98,13 +95,15 @@ class ListProduct extends React.Component {
 }
 
 ListProduct.defaultProps = {
-  componentId: 'listproductscreen'
-  // actions: {}
+  componentId: 'listproductscreen',
+  actions: {},
+  transactions: {}
 };
 
 ListProduct.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object,
+  transactions: PropTypes.object
 };
 
 export default ListProduct;
