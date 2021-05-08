@@ -23,6 +23,20 @@ class Home extends React.Component {
 
   _openSideMenu = () => {};
 
+  convertToRupiah(angka) {
+    let rupiah = '';
+    const angkarev = angka
+      .toString()
+      .split('')
+      .reverse()
+      .join('');
+    for (let i = 0; i < angkarev.length; i += 1) if (i % 3 === 0) rupiah += `${angkarev.substr(i, 3)}.`;
+    return `Rp. ${rupiah
+      .split('', rupiah.length - 1)
+      .reverse()
+      .join('')}`;
+  }
+
   render() {
     const { data } = this.props;
 
@@ -36,7 +50,7 @@ class Home extends React.Component {
           <View style={styles.menuContainer}>
             <View style={[styles.menu, styles.menuLong]}>
               <View style={{ flex: 1 }}>
-                <Text style={styles.menuLongNum}>{data?.revenue ?? 0}</Text>
+                <Text style={styles.menuLongNum}>{this.convertToRupiah(data?.revenue ?? 0)}</Text>
                 <Text style={styles.menuLongDesc}>Revenue was made this month</Text>
               </View>
 
