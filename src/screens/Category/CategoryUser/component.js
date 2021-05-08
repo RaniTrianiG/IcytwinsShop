@@ -1,23 +1,23 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Image, Text, ScrollView, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
-import { Button } from 'react-native-elements';
-
 import PropTypes from 'prop-types';
-
+import { Button } from 'react-native-elements';
+import { API } from 'react-native-dotenv';
 import BackIcon from '../../../assets/png/icon-back.png';
 
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
-import productImage from '../../../assets/png/product.png';
-import IconUser from '../../../assets/png/icon-user.png';
+import IconUser from '../../../assets/png/iconUser.png';
 import { SCREENS } from '../../../constants';
+
 import styles from './styles';
 
 class CategoryUser extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
+    actions.getData();
 
     actions.getProfile();
   }
@@ -77,9 +77,32 @@ class CategoryUser extends React.Component {
     Navigation.pop(componentId);
   };
 
-  render() {
-    // const { selectedData, profile } = this.props;
+  _renderFlatList = item => {
+    const imgUrl = `${API}/category/${item.item.id}.jpg`;
+    console.log(imgUrl);
+    return (
+      <TouchableOpacity
+        onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)}
+        style={styles.category}
+      >
+        <View style={styles.titleCategory}>
+          <Text style={styles.menuLongNum}>{item.item.name}</Text>
+        </View>
+        <View style={styles.menuIcon}>
+          <Image
+            style={styles.icon}
+            source={{
+              uri: imgUrl
+            }}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
+  render() {
+    const { selectedData, profile, category } = this.props;
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -94,14 +117,11 @@ class CategoryUser extends React.Component {
               buttonStyle={styles.button}
               titleStyle={styles.buttonText}
             />
-            <TouchableOpacity onPress={this._navigateToDetailCategory} style={styles.category}>
-              <View style={styles.titleCategory}>
-                <Text style={styles.menuLongNum}>Bouquet</Text>
-              </View>
-              <View style={styles.menuIcon}>
-                <Image style={styles.icon} source={productImage} />
-              </View>
-            </TouchableOpacity>
+            <FlatList
+              data={category?.data ?? []}
+              keyExtractor={(_, idx) => `item-${idx}`}
+              renderItem={this._renderFlatList}
+            />
           </ScrollView>
         </View>
         <View style={styles.bar}>
@@ -147,14 +167,16 @@ class CategoryUser extends React.Component {
 
 CategoryUser.defaultProps = {
   componentId: 'categoryuserscreen',
-  // selectedData: {},
-  actions: {}
+  selectedData: {},
+  actions: {},
+  category: {}
 };
 
 CategoryUser.propTypes = {
   componentId: PropTypes.string,
-  // selectedData: PropTypes.object,
-  actions: PropTypes.object
+  selectedData: PropTypes.object,
+  actions: PropTypes.object,
+  category: PropTypes.object
 };
 
 export default CategoryUser;

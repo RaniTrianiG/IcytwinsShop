@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from './action';
+import * as actions from '../ListCategory/action';
 import { getProfile } from '../../Login/action';
 import Component from './component';
 
 const mapStateToProps = state => {
   return {
-    ...state.home
+    ...state.category
   };
 };
 
