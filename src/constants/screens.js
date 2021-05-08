@@ -14,6 +14,8 @@ const screens = {
   ADD_CATEGORY: 'app.category.add',
   DETAIL_CATEGORY: 'app.category.detail',
 
+  CATEGORYUSER: 'app.category.categoryuser',
+
   SUB_CATEGORY: 'app.sub_category.list',
   ADD_SUB_CATEGORY: 'app.sub_category.add',
   DETAIL_SUB_CATEGORY: 'app.sub_category.detail',
@@ -29,7 +31,8 @@ const screens = {
   USER_DETAIL_PRODUCT: 'app.user.detail_product',
   USER_CART: 'app.user.cart',
 
-  PROFILE: 'app.profile'
+  PROFILE: 'app.profile',
+  PROFILE_USER: 'app.user.profileuser'
 
 };
 

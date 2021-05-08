@@ -15,7 +15,6 @@ const style = StyleSheet.create({
     lineHeight: 20,
     textTransform: 'uppercase'
   },
-
   inputContainer: {
     marginHorizontal: 16
   }

@@ -21,6 +21,8 @@ import Product from '../screens/Product/ListProduct';
 import ProductDetail from '../screens/Product/DetailProduct';
 import ProductAdd from '../screens/Product/AddProduct';
 
+import CategoryUser from '../screens/Category/CategoryUser';
+
 import Profile from '../screens/Profile';
 
 import Transaction from '../screens/Transaction/ListTransaction';
@@ -28,6 +30,7 @@ import Transaction from '../screens/Transaction/ListTransaction';
 import UserHome from '../screens/User/Home';
 import UserDetailProduct from '../screens/User/Detail';
 import UserCartProduct from '../screens/User/Cart';
+import ProfileUser from '../screens/User/ProfileUser';
 
 const store = configureStore();
 
@@ -74,6 +77,10 @@ const registerScreens = () => {
   Navigation.registerComponentWithRedux(SCREENS.USER_CART, () => UserCartProduct, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.PROFILE, () => Profile, Provider, store);
+  Navigation.registerComponentWithRedux(SCREENS.CATEGORYUSER, () => CategoryUser, Provider, store);
+
+  Navigation.registerComponentWithRedux(SCREENS.PROFILE_USER, () => ProfileUser, Provider, store);
+
 
 };
 
