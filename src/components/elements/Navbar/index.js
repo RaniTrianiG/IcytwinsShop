@@ -21,7 +21,7 @@ const MENU = [
   { name: 'Category', route: SCREENS.CATEGORY },
   // { name: 'Sub Category', route: SCREENS.SUB_CATEGORY },
   { name: 'Transaction' },
-  { name: 'Payment Confirmation', route: SCREENS.TRANSACTION },
+  { name: 'Payment Confirmation', route: SCREENS.TRANSACTION, status: 1 },
   { name: 'Process Needed', route: SCREENS.TRANSACTION },
   { name: 'Completed', route: SCREENS.TRANSACTION },
   { name: 'Canceled', route: SCREENS.TRANSACTION }
