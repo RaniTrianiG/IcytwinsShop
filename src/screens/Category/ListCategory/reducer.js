@@ -4,7 +4,10 @@ import { objectUpdater } from '../../../utils';
 const initialState = {
   isLoading: false,
   error: null,
-  category: {}
+  category: {},
+  category: null,
+  error: null,
+  profile: null
 };
 
 const reducers = (state = initialState, action) => {
@@ -17,6 +20,9 @@ const reducers = (state = initialState, action) => {
       return objectUpdater(state, { isLoading: false, category: data });
     case ACTIONS.GET_CATEGORY_FAILED:
       return objectUpdater(state, { isLoading: false, error });
+      return objectUpdater(state, { category: data });
+    case ACTIONS.SET_PROFILE_SUCCESS:
+      return objectUpdater(state, { profile: data });
     default:
       return state;
   }

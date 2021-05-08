@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './action';
+import { getProfile } from '../../Login/action';
 import * as categoryAction from '../ListCategory/action';
 import Component from './component';
 
@@ -12,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators({ ...actions, ...categoryAction }, dispatch)
+    actions: bindActionCreators({ ...actions, ...categoryAction, getProfile }, dispatch)
   };
 };
 

@@ -27,7 +27,10 @@ const screens = {
 
   USER_HOME: 'app.user.home',
   USER_DETAIL_PRODUCT: 'app.user.detail_product',
-  USER_CART: 'app.user.cart'
+  USER_CART: 'app.user.cart',
+
+  PROFILE: 'app.profile'
+
 };
 
 export default screens;

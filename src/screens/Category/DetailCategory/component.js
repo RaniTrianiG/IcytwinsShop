@@ -12,6 +12,12 @@ import DetailCategoryForm from '../../../components/forms/ViewCategory';
 import styles from './styles';
 
 class DetailCategory extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.getProfile();
+  }
+
   _handleSubmit = data => {
     const { actions, selectedData } = this.props;
     const { id, description } = selectedData;
@@ -33,11 +39,11 @@ class DetailCategory extends React.Component {
   };
 
   render() {
-    const { selectedData } = this.props;
+    const { selectedData, profile } = this.props;
 
     return (
       <View style={styles.container}>
-        <Navbar />
+        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)} />
 
         <View style={styles.content}>
           <DetailCategoryForm

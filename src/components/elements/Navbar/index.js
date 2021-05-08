@@ -27,7 +27,7 @@ const MENU = [
   { name: 'Canceled', route: SCREENS.TRANSACTION }
 ];
 
-const Component = ({ title, onNotificationBtnPress }) => {
+const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress }) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const toogleSideMenu = newIsVisible => () => {
@@ -60,6 +60,10 @@ const Component = ({ title, onNotificationBtnPress }) => {
         }
       }
     });
+  };
+
+  const handleNavigation = () => {
+    handleNavigate({ route: SCREENS.PROFILE })();
   };
 
   const handleLogOut = () => {
@@ -108,12 +112,15 @@ const Component = ({ title, onNotificationBtnPress }) => {
         <View style={styles.sideContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 23 }}>
             <View style={styles.sidePhoto}>
-              <Image style={styles.headerBtnIcon} />
+              <Text style={styles.headerBtnIcon}
+              >{initialName}</Text>
             </View>
 
             <View style={{ flex: 1 }}>
-              <Text style={styles.sideName}>Matilda Brown</Text>
-              <Text style={styles.sideEmail}>matildabrown@mail.com</Text>
+              <TouchableOpacity onPress={handleNavigation}>
+                <Text style={styles.sideName}>{fullName}</Text>
+                <Text style={styles.sideEmail}>{mail}</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -135,11 +142,17 @@ const Component = ({ title, onNotificationBtnPress }) => {
 
 Component.defaultProps = {
   title: 'Icytwins.beauty',
-  onNotificationBtnPress: () => {}
+  fullName: 'Icytwins.beauty',
+  mail: 'Icytwins.beauty@gmail.com',
+  initialName: 'Icytwins.beauty',
+  onNotificationBtnPress: () => { }
 };
 
 Component.propTypes = {
   title: PropTypes.string,
+  fullName: PropTypes.string,
+  mail: PropTypes.string,
+  initialName: PropTypes.string,
   onNotificationBtnPress: PropTypes.func
 };
 

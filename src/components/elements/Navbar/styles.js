@@ -12,10 +12,12 @@ const style = StyleSheet.create({
     width: 30
   },
   headerBtnIcon: {
-    flex: 1,
-    height: null,
-    resizeMode: 'contain',
-    width: null
+    color: "#FFFFFF",
+    fontFamily: "Lato-Bold",
+    fontSize: 16,
+    alignSelf: "center",
+    justifyContent: "center",
+    marginVertical: 20
   },
   headerText: {
     flex: 1,
@@ -32,7 +34,8 @@ const style = StyleSheet.create({
   menuItem: {
     flex: 1,
     fontSize: 14,
-    lineHeight: 21
+    lineHeight: 21, 
+    marginTop: 15
   },
   menuItemContainer: {
     alignItems: 'center',
@@ -72,7 +75,7 @@ const style = StyleSheet.create({
   },
   sidePhoto: {
     aspectRatio: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#DB3022',
     borderRadius: 64,
     marginRight: 11,
     width: 64

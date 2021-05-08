@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     lineHeight: 23.85,
-    marginBottom: 19
+    marginBottom: 19,
+    marginTop: 20
   }
 });
 

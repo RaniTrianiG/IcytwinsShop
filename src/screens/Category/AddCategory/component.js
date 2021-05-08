@@ -12,6 +12,11 @@ import AddCategoryForm from '../../../components/forms/AddCategory';
 import styles from './styles';
 
 class AddCategory extends React.Component {
+  componentDidMount() {
+    const { actions } = this.props;
+
+    actions.getProfile();
+  }
   _handleBack = () => {
     const { componentId } = this.props;
 
@@ -25,9 +30,10 @@ class AddCategory extends React.Component {
   };
 
   render() {
+    const { profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar />
+        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)} />
 
         <View style={styles.content}>
           <AddCategoryForm onSubmit={this._handleSubmit} />

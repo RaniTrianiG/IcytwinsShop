@@ -17,6 +17,7 @@ class ListCategory extends React.Component {
     const { actions } = this.props;
 
     actions.getData();
+    actions.getProfile();
   }
 
   _handleViewDetail = data => () => {
@@ -69,11 +70,11 @@ class ListCategory extends React.Component {
   );
 
   render() {
-    const { category } = this.props;
+    const { category, profile } = this.props;
 
     return (
       <View style={styles.container}>
-        <Navbar />
+        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)} />
 
         <View style={styles.content}>
           <Text style={styles.title}>Category</Text>

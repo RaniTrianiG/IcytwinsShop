@@ -20,6 +20,10 @@ class ListProduct extends React.Component {
   }
 
   _handleViewDetail = data => () => {
+    actions.getProfile();
+  }
+
+  _handleViewDetail = () => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
@@ -89,11 +93,10 @@ class ListProduct extends React.Component {
   );
 
   render() {
-    const { product } = this.props;
-
+    const { product, profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar />
+        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)} />
 
         <View style={styles.content}>
           <Text style={styles.title}>Products</Text>

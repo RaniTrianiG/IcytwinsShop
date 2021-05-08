@@ -21,6 +21,8 @@ import Product from '../screens/Product/ListProduct';
 import ProductDetail from '../screens/Product/DetailProduct';
 import ProductAdd from '../screens/Product/AddProduct';
 
+import Profile from '../screens/Profile';
+
 import Transaction from '../screens/Transaction/ListTransaction';
 
 import UserHome from '../screens/User/Home';
@@ -70,6 +72,9 @@ const registerScreens = () => {
     store
   );
   Navigation.registerComponentWithRedux(SCREENS.USER_CART, () => UserCartProduct, Provider, store);
+
+  Navigation.registerComponentWithRedux(SCREENS.PROFILE, () => Profile, Provider, store);
+
 };
 
 export default registerScreens;

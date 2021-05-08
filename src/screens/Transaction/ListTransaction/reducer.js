@@ -5,7 +5,8 @@ const initialState = {
   isLoading: false,
   error: null,
   data: null,
-  transactions: []
+  transactions: [],
+  profile: null
 };
 
 const reducers = (state = initialState, action) => {
@@ -18,6 +19,8 @@ const reducers = (state = initialState, action) => {
       return objectUpdater(state, { isLoading: false, transactions: data });
     case ACTIONS.GET_TRANSACTION_FAILED:
       return objectUpdater(state, { isLoading: false, error });
+    case ACTIONS.SET_PROFILE_SUCCESS:
+      return objectUpdater(state, { profile: data });
     default:
       return state;
   }
