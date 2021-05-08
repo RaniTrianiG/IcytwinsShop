@@ -16,16 +16,37 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#DB3022',
-    borderRadius: 10,
+    borderRadius: 30,
     paddingVertical: 14
+  },
+  image: {
+    borderRadius: 10,
+    width: 400,
+    height: 400,
+    resizeMode:'stretch'
   },
   buttonText: {
     fontFamily: 'serif',
     fontSize: 14,
     fontWeight: '700',
-    lineHeight: 30,
+    lineHeight: 15,
     textTransform: 'uppercase',
-    width: 130
+    width: 120,
+    height: 20
+  },
+  buttons: {
+    paddingTop: 120,
+    width: '90%'
+  },
+  viewChange: { alignItems: 'flex-end', bottom: 30, width: '98%' },
+  viewArow: { alignItems: 'flex-end', bottom: 20, width: '98%' },
+  textChange: { fontSize: 16, fontFamily: 'serif', color: "#222222", fontWeight: 'bold' },
+  buttonTexts: {
+    fontFamily: 'serif',
+    fontSize: 18,
+    fontWeight: '700',
+    lineHeight: 20,
+    color: "#222222"
   },
   category: {
     alignSelf: 'center',
@@ -46,13 +67,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 26,
     marginTop: 13
   },
-  icon: {
-    borderRadius: 5,
-    flex: 1,
-    height: null,
-    resizeMode: 'cover',
-    width: null
-  },
   img: {
     flex: 1,
     height: null,
@@ -72,10 +86,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'serif',
-    fontSize: 34,
+    fontSize: 28,
     fontWeight: '700',
     lineHeight: 45,
-    marginBottom: 63,
+    marginBottom: 15,
     marginTop: 30
   },
   titleCategory: {

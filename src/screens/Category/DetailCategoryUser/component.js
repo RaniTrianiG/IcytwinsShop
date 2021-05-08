@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import BackIcon from '../../../assets/png/icon-back.png';
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
-import productImage from '../../../assets/png/product.png';
+import productImage from '../../../assets/png/detailCategories.png';
+import arow from '../../../assets/png/arow.png';
 import IconUser from '../../../assets/png/icon-user.png';
 import { SCREENS } from '../../../constants';
 import styles from './styles';
@@ -87,20 +88,41 @@ class DetailCategoryUser extends React.Component {
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
-            <Text style={styles.title}>Categories</Text>
-            <Button
-              title="SUMMER SALES Up to 50% off"
-              buttonStyle={styles.button}
-              titleStyle={styles.buttonText}
-            />
-            <TouchableOpacity style={styles.category}>
-              <View style={styles.titleCategory}>
-                <Text style={styles.menuLongNum}>Bouquet</Text>
+            <Text style={styles.title}>Bouquet</Text>
+            <View style={{ alignSelf: 'center', height: 300 }}>
+              <Image
+                source={productImage}
+                style={styles.image}
+              />
+            </View>
+            <View style={{ justifyContent: 'space-between' }}>
+              <View style={styles.buttons}>
+                <Text style={styles.buttonTexts}>Bouquet</Text>
+                <Text style={{ color: '#9B9B9B', fontSize: 12, fontFamily: 'serif' }}>Snacks 12 with varian mix</Text>
               </View>
-              <View style={styles.menuIcon}>
-                <Image style={styles.icon} source={productImage} />
+              <View style={styles.viewChange}>
+                <Text style={styles.textChange}>200.000</Text>
               </View>
-            </TouchableOpacity>
+            </View>
+            <View style={{ bottom: 10 }}>
+              <Text style={{ color: '#222222', fontSize: 13, lineHeight: 15, fontFamily: 'serif' }}>
+                Sweet Bouqet for your beloved can contain from snacks, makeup, skincare, and even flowers be it dry or ordinary flowers
+                , frill-trimmed square neckline with concealed elastication. Elasticated seam under the bust and short puff sleeves with a small frill trim.
+              </Text>
+            </View>
+            <View style={{ justifyContent: 'space-between' }}>
+              <View>
+                <TouchableOpacity>
+                  <Text style={{ fontSize: 18, fontFamily: 'serif', fontWeight: 'bold' }}>Customer Service</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.viewArow}>
+                <Image source={arow} style={{ height: 20 }} />
+              </View>
+            </View>
+            <View style={{ paddingBottom: 30 }}>
+              <Button title="Add To Cart" buttonStyle={styles.button} titleStyle={styles.buttonText} />
+            </View>
           </ScrollView>
         </View>
 
