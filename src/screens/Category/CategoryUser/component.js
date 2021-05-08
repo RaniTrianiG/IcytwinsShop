@@ -50,10 +50,25 @@ class CategoryUser extends React.Component {
     });
   };
 
-  _handleSubmit = data => {
-    const { actions, selectedData } = this.props;
+  _navigateToDetailCategory = () => {
+    const { componentId } = this.props;
 
-    actions.getData();
+    Navigation.push(componentId, {
+      component: {
+        name: SCREENS.DETAIL_CATEGORY_USER,
+        options: {
+          statusBar: {
+            style: 'dark',
+            backgroundColor: '#F9F9F9'
+          }
+        }
+      }
+    });
+  };
+
+  _handleSubmit = () => {
+    // const { actions, selectedData } = this.props;
+    // actions.getData();
   };
 
   _handleBack = () => {
@@ -90,9 +105,9 @@ class CategoryUser extends React.Component {
     console.log(this.props);
     return (
       <View style={styles.container}>
-        <View style={styles.loginScreen}>
+        <View style={styles.content}>
           <ScrollView>
-            <TouchableOpacity onPress={this._handleTabBtnPress(SCREENS.USER_HOME)} style={styles.back}>
+            <TouchableOpacity onPress={this._handleBack} style={styles.back}>
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
@@ -112,7 +127,7 @@ class CategoryUser extends React.Component {
         <View style={styles.bar}>
           <TouchableOpacity
             disabled
-            onPress={this._handleTabBtnPress(SCREENS.USER_HOME)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -124,7 +139,7 @@ class CategoryUser extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.USER_CART)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -133,7 +148,7 @@ class CategoryUser extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.PROFILE_USER)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.PROFILE_USER })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>

@@ -3,11 +3,17 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
-import { Button } from 'react-native-elements';
-import BackIcon from '../../../assets/png/icon-back.png';
+// import PropTypes from 'prop-types';
+
+// import { Button } from 'react-native-elements';
+
 import FormProfile from '../../../components/forms/Profile';
 
-import PropTypes from 'prop-types';
+import BackIcon from '../../../assets/png/icon-back.png';
+
+import IconHome from '../../../assets/png/icon-home.png';
+import IconBag from '../../../assets/png/icon-bag.png';
+import IconUser from '../../../assets/png/icon-user-red.png';
 
 import { SCREENS } from '../../../constants';
 
@@ -15,16 +21,15 @@ import styles from './styles';
 
 class ProfileUser extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
-
-    actions.getProfile();
+    // const { actions } = this.props;
+    // actions.getProfile();
   }
 
   _handleSubmit = () => {
-    handleNavigate({ route: SCREENS.PRODUCT });
-  }
+    this._handleTabBtnPress({ route: SCREENS.PRODUCT });
+  };
 
-  handleNavigate = ({ route }) => () => {
+  _handleTabBtnPress = ({ route }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -53,19 +58,23 @@ class ProfileUser extends React.Component {
   };
 
   render() {
-    const { profile } = this.props;
+    // const { profile } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <ScrollView>
-            <TouchableOpacity onPress={this.handleNavigate(SCREENS.USER_HOME)} style={styles.back}>
+            <TouchableOpacity
+              onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
+              style={styles.back}
+            >
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
             <Text style={styles.h1}>Settings</Text>
             <Text style={styles.title}>Personal Information</Text>
 
-            {/* <FormProfile onSubmit={this._handleSubmit} handleForget={this._handleForget} /> */}
+            <FormProfile onSubmit={this._handleSubmit} handleForget={this._handleForget} />
           </ScrollView>
         </View>
         <View
@@ -79,8 +88,7 @@ class ProfileUser extends React.Component {
           }}
         >
           <TouchableOpacity
-            disabled={true}
-            onPress={this._handleTabBtnPress(SCREENS.USER_HOME)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -89,10 +97,10 @@ class ProfileUser extends React.Component {
                 source={IconHome}
               />
             </View>
-            <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Home</Text>
+            <Text style={{ fontSize: 10, lineHeight: 10 }}>Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.USER_CART)}
+            onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
@@ -100,14 +108,14 @@ class ProfileUser extends React.Component {
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this._handleTabBtnPress(SCREENS.USER_CART)}
-            style={{ alignItems: 'center' }}
-          >
+          <TouchableOpacity disabled style={{ alignItems: 'center' }}>
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
-              <Image style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }} source={IconUser} />
+              <Image
+                style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+                source={IconUser}
+              />
             </View>
-            <Text style={{ fontSize: 10, lineHeight: 10 }}>Profile</Text>
+            <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -116,12 +124,12 @@ class ProfileUser extends React.Component {
 }
 
 ProfileUser.defaultProps = {
-  componentId: 'profileuserscreen'
+  // componentId: 'profileuserscreen'
   // actions: {}
 };
 
 ProfileUser.propTypes = {
-  componentId: PropTypes.string
+  // componentId: PropTypes.string
   // actions: PropTypes.object
 };
 
