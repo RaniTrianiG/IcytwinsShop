@@ -11,6 +11,7 @@ import Navbar from '../../../components/elements/Navbar';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
+import { ScrollView } from 'react-native';
 
 const DUMMY_DATA = {
   tableFlex: [0.5, 1, 2, 1.2, 1],
@@ -67,29 +68,43 @@ class ListProduct extends React.Component {
     const { transactions, profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)}/>
+        <Navbar
+          fullName={profile?.data?.name ?? null}
+          mail={profile?.data.email ?? null}
+          initialName={profile?.data.name
+            .split(' ')
+            .map(i => i[0])
+            .join('')
+            .substring(0, 2)}
+        />
 
         <View style={styles.content}>
           <Text style={styles.title}>Transaction</Text>
 
-          <Table style={styles.table}>
-            <Row
-              style={styles.tableHead}
-              data={DUMMY_DATA.tableHead}
-              flexArr={DUMMY_DATA.tableFlex}
-              textStyle={styles.tableHeadText}
-            />
+          <ScrollView>
+            <Table style={styles.table}>
+              <Row
+                style={styles.tableHead}
+                data={DUMMY_DATA.tableHead}
+                flexArr={DUMMY_DATA.tableFlex}
+                textStyle={styles.tableHeadText}
+              />
 
-            {transactions?.map((rowData, index) => (
-              <TableWrapper key={index} style={styles.tableRow}>
-                <Cell key={rowData.id} textStyle={styles.tableText} flex={0.5} data={rowData.id} />
-                <Cell textStyle={styles.tableText} flex={1} data={rowData.invoice} />
-                <Cell textStyle={styles.tableText} flex={2} data={rowData.total} />
-                <Cell textStyle={styles.tableText} flex={1.2} data={this._renderStatus(rowData.status)} />
-                <Cell textStyle={styles.tableText} flex={1.2} data={this._renderActions(rowData.id, index)} />
-              </TableWrapper>
-            ))}
-          </Table>
+              {transactions?.map((rowData, index) => (
+                <TableWrapper key={index} style={styles.tableRow}>
+                  <Cell key={rowData.id} textStyle={styles.tableText} flex={0.5} data={rowData.id} />
+                  <Cell textStyle={styles.tableText} flex={1.5} data={`#${rowData.invoice}`} />
+                  <Cell textStyle={styles.tableText} flex={2} data={rowData.total} />
+                  <Cell textStyle={styles.tableText} flex={1.2} data={this._renderStatus(rowData.status)} />
+                  <Cell
+                    textStyle={styles.tableText}
+                    flex={1.2}
+                    data={this._renderActions(rowData.id, index)}
+                  />
+                </TableWrapper>
+              ))}
+            </Table>
+          </ScrollView>
         </View>
       </View>
     );
