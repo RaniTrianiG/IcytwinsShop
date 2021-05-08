@@ -64,7 +64,7 @@ class AddProduct extends React.Component {
     const { profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data.name.split(" ").map((i) => i[0]).join("").substring(0, 2)} />
+        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data?.name?.split(" ").map((i) => i[0]).join("").substring(0, 2)?? null} />
 
         <View style={styles.content}>
           <AddProductForm />
