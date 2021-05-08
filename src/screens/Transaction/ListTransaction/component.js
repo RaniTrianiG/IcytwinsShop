@@ -7,11 +7,11 @@ import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
 
 import PropTypes from 'prop-types';
 
+import { ScrollView } from 'react-native';
 import Navbar from '../../../components/elements/Navbar';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
-import { ScrollView } from 'react-native';
 
 const DUMMY_DATA = {
   tableFlex: [0.5, 1, 2, 1.2, 1],
