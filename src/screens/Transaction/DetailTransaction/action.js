@@ -13,7 +13,7 @@ export const getTransactions = (status, successCallback) => async dispatch => {
   };
 
   // eslint-disable-next-line no-undef
-  fetch(`${API + URLS.TRANSACTIONS}?status=${status || `"${status}"`}`, options)
+  fetch(`${API + URLS.TRANSACTIONS}?status=${status}`, options)
     .then(response =>
       response.text().then(resData => ({
         data: resData === '' ? {} : JSON.parse(resData),

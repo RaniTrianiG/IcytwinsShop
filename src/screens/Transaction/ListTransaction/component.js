@@ -12,18 +12,21 @@ import styles from './styles';
 
 class ListProduct extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
-    actions.getTransactions();
+    const { actions, status } = this.props;
+    actions.getTransactions(status);
 
     actions.getProfile();
   }
 
-  _handleViewDetail = () => () => {
+  _handleViewDetail = data => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
       component: {
-        name: SCREENS.HOME,
+        name: SCREENS.DETAIL_TRANSACTION,
+        passProps: {
+          selectedData: data
+        },
         options: {
           statusBar: {
             style: 'dark',
@@ -34,14 +37,11 @@ class ListProduct extends React.Component {
     });
   };
 
-  _renderNames = data => (
-    <View style={styles.tableRow}>
-      <Text style={styles.tableText}>{data}</Text>
-    </View>
-  );
-
-  _renderActions = (_, index) => (
-    <TouchableOpacity style={styles.tableRow} onPress={this._handleViewDetail(index)}>
+  _renderActions = data => (
+    <TouchableOpacity
+      style={[styles.tableRow, { backgroundColor: '#DB3022', justifyContent: 'center', borderRadius: 30 }]}
+      onPress={this._handleViewDetail(data)}
+    >
       <Text style={styles.tableText}>View</Text>
     </TouchableOpacity>
   );
@@ -49,7 +49,7 @@ class ListProduct extends React.Component {
   _renderStatus = status => {
     const statusText = ['New Order', 'Pending', 'Approved', 'Delivered', 'Canceled'];
 
-    return statusText[status];
+    return <Text style={{ fontWeight: '700' }}>{statusText[status]}</Text>;
   };
 
   _renderItem = ({ item, index }) => {
@@ -63,6 +63,12 @@ class ListProduct extends React.Component {
       </View>
     );
   };
+
+  _renderEmpty = () => (
+    <View style={{ alignItems: 'center', paddingVertical: 20 }}>
+      <Text style={styles.tableText}>No Data</Text>
+    </View>
+  );
 
   render() {
     const { transactions, profile } = this.props;
@@ -82,7 +88,7 @@ class ListProduct extends React.Component {
         <View style={styles.content}>
           <Text style={styles.title}>Transaction</Text>
 
-          <View style={[styles.tableHead, styles.table, { flexDirection: 'row' }]}>
+          <View style={[styles.tableHead, styles.table, { flexDirection: 'row', paddingHorizontal: 26 }]}>
             <Text style={[styles.tableHeadText, { flex: 0.5 }]}>#</Text>
             <Text style={[styles.tableHeadText, { flex: 1.5 }]}>Invoice</Text>
             <Text style={[styles.tableHeadText, { flex: 1.5 }]}>Total</Text>
@@ -94,6 +100,8 @@ class ListProduct extends React.Component {
             data={transactions ?? []}
             keyExtractor={(_, idx) => `item-${idx}`}
             renderItem={this._renderItem}
+            ListEmptyComponent={this._renderEmpty}
+            contentContainerStyle={{ paddingHorizontal: 26 }}
           />
         </View>
       </View>
@@ -105,14 +113,16 @@ ListProduct.defaultProps = {
   componentId: 'listproductscreen',
   actions: {},
   transactions: [],
-  profile: {}
+  profile: {},
+  status: 0
 };
 
 ListProduct.propTypes = {
   componentId: PropTypes.string,
   actions: PropTypes.object,
   transactions: PropTypes.array,
-  profile: PropTypes.object
+  profile: PropTypes.object,
+  status: PropTypes.number
 };
 
 export default ListProduct;

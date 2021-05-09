@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
@@ -21,10 +21,10 @@ const MENU = [
   { name: 'Category', route: SCREENS.CATEGORY },
   // { name: 'Sub Category', route: SCREENS.SUB_CATEGORY },
   { name: 'Transaction' },
-  { name: 'Payment Confirmation', route: SCREENS.TRANSACTION, status: 1 },
-  { name: 'Process Needed', route: SCREENS.TRANSACTION },
-  { name: 'Completed', route: SCREENS.TRANSACTION },
-  { name: 'Canceled', route: SCREENS.TRANSACTION }
+  { name: 'Payment Confirmation', route: SCREENS.TRANSACTION, passProps: { status: 0 } },
+  { name: 'Process Needed', route: SCREENS.TRANSACTION, passProps: { status: 1 } },
+  { name: 'Completed', route: SCREENS.TRANSACTION, passProps: { status: 2 } },
+  { name: 'Canceled', route: SCREENS.TRANSACTION, passProps: { status: 5 } }
 ];
 
 const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress }) => {
@@ -34,13 +34,14 @@ const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress 
     setIsVisible(newIsVisible);
   };
 
-  const handleNavigate = ({ route }) => () => {
+  const handleNavigate = ({ route, passProps }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
           children: [
             {
               component: {
+                passProps,
                 name: route,
                 options: {
                   statusBar: {
@@ -107,6 +108,7 @@ const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress 
         onBackdropPress={toogleSideMenu(false)}
         backdropOpacity={0.5}
         style={styles.modal}
+        deviceHeight={Dimensions.get('screen').height}
       >
         <View style={styles.sideContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 23 }}>
