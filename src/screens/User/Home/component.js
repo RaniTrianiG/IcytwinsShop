@@ -116,7 +116,8 @@ class Home extends React.Component {
 
   render() {
     const { data, item } = this.props;
-
+    console.log(item);
+    console.log(this.props);
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>

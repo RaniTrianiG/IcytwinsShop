@@ -82,7 +82,7 @@ class CategoryUser extends React.Component {
     const imgUrl = `${API}/category/${item.item.id}.jpg`;
     return (
       <TouchableOpacity
-        onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME, item })}
+        onPress={this._handleTabBtnPress({ route: SCREENS.DETAIL_CATEGORY_USER, item })}
         style={styles.category}
       >
         <View style={styles.titleCategory}>

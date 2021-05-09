@@ -6,6 +6,7 @@ import { Button } from 'react-native-elements';
 
 import PropTypes from 'prop-types';
 
+import { API } from 'react-native-dotenv';
 import BackIcon from '../../../assets/png/icon-back.png';
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
@@ -22,7 +23,7 @@ class DetailCategoryUser extends React.Component {
     actions.getProfile();
   }
 
-  _handleTabBtnPress = ({ route }) => () => {
+  _handleTabBtnPress = ({ route, item }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -30,6 +31,7 @@ class DetailCategoryUser extends React.Component {
             {
               component: {
                 name: route,
+                passProps: item,
                 options: {
                   statusBar: {
                     style: 'dark',
@@ -78,12 +80,16 @@ class DetailCategoryUser extends React.Component {
   };
 
   openWA = () => {
-    Linking.openURL('https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0')
-  }
+    Linking.openURL(
+      'https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0'
+    );
+  };
 
   render() {
     // const { selectedData, profile } = this.props;
-
+    const { item } = this.props;
+    const imgUrl = `${API}/category/${item.id}.jpg`;
+    console.log(item);
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -92,32 +98,26 @@ class DetailCategoryUser extends React.Component {
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
-            <Text style={styles.title}>Bouquet</Text>
+            <Text style={styles.title}>{item.name}</Text>
             <View style={{ alignSelf: 'center', height: 300 }}>
-              <Image
-                source={productImage}
-                style={styles.image}
-              />
+              <Image source={{ uri: imgUrl }} style={styles.image} />
             </View>
             <View style={{ justifyContent: 'space-between' }}>
               <View style={styles.buttons}>
-                <Text style={styles.buttonTexts}>Bouquet</Text>
-                <Text style={{ color: '#9B9B9B', fontSize: 12, fontFamily: 'serif' }}>Snacks 12 with varian mix</Text>
-              </View>
-              <View style={styles.viewChange}>
-                <Text style={styles.textChange}>200.000</Text>
+                <Text style={styles.buttonTexts}>{}</Text>
               </View>
             </View>
             <View style={{ bottom: 10 }}>
               <Text style={{ color: '#222222', fontSize: 13, lineHeight: 15, fontFamily: 'serif' }}>
-                Sweet Bouqet for your beloved can contain from snacks, makeup, skincare, and even flowers be it dry or ordinary flowers
-                , frill-trimmed square neckline with concealed elastication. Elasticated seam under the bust and short puff sleeves with a small frill trim.
+                {item.description}
               </Text>
             </View>
             <View style={{ justifyContent: 'space-between' }}>
               <View>
                 <TouchableOpacity onPress={this.openWA}>
-                  <Text style={{ fontSize: 18, fontFamily: 'serif', fontWeight: 'bold' }}>Customer Service</Text>
+                  <Text style={{ fontSize: 18, fontFamily: 'serif', fontWeight: 'bold' }}>
+                    Customer Service
+                  </Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.viewArow}>
@@ -125,7 +125,12 @@ class DetailCategoryUser extends React.Component {
               </View>
             </View>
             <View style={{ paddingBottom: 30 }}>
-              <Button title="Add To Cart" buttonStyle={styles.button} titleStyle={styles.buttonText} />
+              <Button
+                title="Products"
+                buttonStyle={styles.button}
+                titleStyle={styles.buttonText}
+                onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME, item: { item } })}
+              />
             </View>
           </ScrollView>
         </View>
