@@ -25,6 +25,7 @@ const screens = {
   DETAIL_PRODUCT: 'app.product.detail',
 
   TRANSACTION: 'app.transaction.list',
+  REPORT_TRANSACTION: 'app.transaction.report',
   DETAIL_TRANSACTION: 'app.transaction.detail',
 
   USER_HOME: 'app.user.home',
@@ -36,7 +37,9 @@ const screens = {
   DETAIL_CATEGORY_USER: 'app.category.detailcategoryuser',
   HISTORY: 'app.user.history',
   DETAIL_HISTORY: 'app.user.detailhistory',
-  SUCCESS_CHECKOUT: 'app.user.succsscheckout'
+  SUCCESS_CHECKOUT: 'app.user.succsscheckout',
+
+  ADD_ADMIN: 'app.owner.addadmin'
 };
 
 export default screens;

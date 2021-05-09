@@ -48,7 +48,6 @@ const style = StyleSheet.create({
     borderBottomColor: '#F1F1F1',
     borderBottomWidth: 1,
     flexDirection: 'row',
-    marginLeft: 8,
     paddingVertical: 5
   },
   menuSubTitle: {

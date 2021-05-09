@@ -40,9 +40,11 @@ class Home extends React.Component {
 
   render() {
     const { data, profile } = this.props;
+
     return (
       <View style={styles.container}>
         <Navbar
+          role={profile?.data?.role}
           fullName={profile?.data?.name ?? null}
           mail={profile?.data.email ?? null}
           initialName={
@@ -132,12 +134,14 @@ class Home extends React.Component {
 
 Home.defaultProps = {
   data: {},
-  actions: {}
+  actions: {},
+  profile: {}
 };
 
 Home.propTypes = {
   data: PropTypes.object,
-  actions: PropTypes.object
+  actions: PropTypes.object,
+  profile: PropTypes.object
 };
 
 export default Home;

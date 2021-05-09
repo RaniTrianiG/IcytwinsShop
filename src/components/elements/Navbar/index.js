@@ -14,21 +14,26 @@ import BurgerMenu from '../../../assets/png/icon-menu.png';
 import Bell from '../../../assets/png/icon-bell.png';
 import Arrow from '../../../assets/png/arrow-right.png';
 
-const MENU = [
-  { name: 'Dashboard', route: SCREENS.HOME },
-  { name: 'Master Data' },
-  { name: 'Product', route: SCREENS.PRODUCT },
-  { name: 'Category', route: SCREENS.CATEGORY },
-  // { name: 'Sub Category', route: SCREENS.SUB_CATEGORY },
-  { name: 'Transaction' },
-  { name: 'Payment Confirmation', route: SCREENS.TRANSACTION, passProps: { status: 0 } },
-  { name: 'Process Needed', route: SCREENS.TRANSACTION, passProps: { status: 1 } },
-  { name: 'Completed', route: SCREENS.TRANSACTION, passProps: { status: 2 } },
-  { name: 'Canceled', route: SCREENS.TRANSACTION, passProps: { status: 5 } }
-];
-
-const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress }) => {
+const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress, role }) => {
   const [isVisible, setIsVisible] = React.useState(false);
+
+  const MENU_ADMIN = [
+    { name: 'Dashboard', route: SCREENS.HOME },
+    { name: 'Master Data' },
+    { name: 'Product', route: SCREENS.PRODUCT },
+    { name: 'Category', route: SCREENS.CATEGORY },
+    { name: 'Transaction' },
+    { name: 'Payment Confirmation', route: SCREENS.TRANSACTION, passProps: { status: 0 } },
+    { name: 'Process Needed', route: SCREENS.TRANSACTION, passProps: { status: 1 } },
+    { name: 'Completed', route: SCREENS.TRANSACTION, passProps: { status: 2 } },
+    { name: 'Canceled', route: SCREENS.TRANSACTION, passProps: { status: 5 } }
+  ];
+
+  const MENU_OWNER = [
+    { name: 'Dashboard', route: SCREENS.HOME },
+    { name: 'Transaction Report', route: SCREENS.REPORT_TRANSACTION },
+    { name: 'Add Admin', route: SCREENS.ADD_ADMIN }
+  ];
 
   const toogleSideMenu = newIsVisible => () => {
     setIsVisible(newIsVisible);
@@ -125,8 +130,8 @@ const Component = ({ title, fullName, mail, initialName, onNotificationBtnPress 
           </View>
 
           <View style={{ flex: 1 }}>
-            {MENU.map(renderMenu)}
-            <TouchableOpacity style={[styles.menuItemContainer, { marginLeft: 0 }]} onPress={handleLogOut}>
+            {(role === 1 ? MENU_ADMIN : MENU_OWNER).map(renderMenu)}
+            <TouchableOpacity style={styles.menuItemContainer} onPress={handleLogOut}>
               <Text style={[styles.menuItem, { color: '#9F1D25' }]}>Logout</Text>
 
               <View style={styles.menuIcon}>
@@ -145,6 +150,7 @@ Component.defaultProps = {
   fullName: 'Icytwins.beauty',
   mail: 'Icytwins.beauty@gmail.com',
   initialName: 'Icytwins.beauty',
+  role: 1,
   onNotificationBtnPress: () => {}
 };
 
@@ -152,6 +158,7 @@ Component.propTypes = {
   title: PropTypes.string,
   fullName: PropTypes.string,
   mail: PropTypes.string,
+  role: PropTypes.number,
   initialName: PropTypes.string,
   onNotificationBtnPress: PropTypes.func
 };

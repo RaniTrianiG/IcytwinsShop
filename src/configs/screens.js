@@ -26,6 +26,7 @@ import CategoryUser from '../screens/Category/CategoryUser';
 import Profile from '../screens/Profile';
 
 import Transaction from '../screens/Transaction/ListTransaction';
+import ReportTransaction from '../screens/Transaction/ReportTransaction';
 import DetailTransaction from '../screens/Transaction/DetailTransaction';
 
 import UserHome from '../screens/User/Home';
@@ -37,6 +38,7 @@ import History from '../screens/User/History';
 import DetailHistory from '../screens/User/DetailHistory';
 import SuccessCheckout from '../screens/User/SuccessCheckout';
 
+import AdminAdd from '../screens/AddAdmin';
 
 const store = configureStore();
 
@@ -72,6 +74,7 @@ const registerScreens = () => {
   Navigation.registerComponentWithRedux(SCREENS.DETAIL_PRODUCT, () => ProductDetail, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.TRANSACTION, () => Transaction, Provider, store);
+  Navigation.registerComponentWithRedux(SCREENS.REPORT_TRANSACTION, () => ReportTransaction, Provider, store);
   Navigation.registerComponentWithRedux(SCREENS.DETAIL_TRANSACTION, () => DetailTransaction, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.USER_HOME, () => UserHome, Provider, store);
@@ -103,7 +106,7 @@ const registerScreens = () => {
   Navigation.registerComponentWithRedux(SCREENS.DETAIL_HISTORY, () => DetailHistory, Provider, store);
   Navigation.registerComponentWithRedux(SCREENS.SUCCESS_CHECKOUT, () => SuccessCheckout, Provider, store);
 
-
+  Navigation.registerComponentWithRedux(SCREENS.ADD_ADMIN, () => AdminAdd, Provider, store);
 };
 
 export default registerScreens;

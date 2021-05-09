@@ -23,7 +23,7 @@ class Login extends React.Component {
             children: [
               {
                 component: {
-                  name: role === 1 ? SCREENS.HOME : SCREENS.USER_HOME,
+                  name: role === 0 ? SCREENS.USER_HOME : SCREENS.HOME,
                   options: {
                     statusBar: {
                       style: 'dark',

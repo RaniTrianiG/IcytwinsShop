@@ -96,6 +96,7 @@ class ListProduct extends React.Component {
     return (
       <View style={styles.container}>
         <Navbar
+          role={profile?.data?.role}
           fullName={profile?.data?.name ?? null}
           mail={profile?.data.email ?? null}
           initialName={profile?.data.name

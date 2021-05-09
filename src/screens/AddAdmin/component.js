@@ -1,40 +1,32 @@
 import React from 'react';
-import { View, Text, ToastAndroid } from 'react-native';
+import { View } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
 import PropTypes from 'prop-types';
 
-import FormProfile from '../../components/forms/Profile';
-
 import Navbar from '../../components/elements/Navbar';
+import { SCREENS } from '../../constants';
+
+import AddAdminForm from '../../components/forms/AddAdmin';
 
 import styles from './styles';
 
-class Profile extends React.Component {
+class AddCategory extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
 
     actions.getProfile();
   }
 
-  _handleSubmit = data => {
-    const { actions } = this.props;
-    actions.postUpdateProfile(data, this._handleFinishSubmit);
-  };
-
-  _handleFinishSubmit = () => {
-    ToastAndroid.showWithGravityAndOffset('Profile updated!', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
-  };
-
-  handleNavigate = ({ route }) => () => {
+  _handleGotoHome = () => {
     Navigation.setRoot({
       root: {
         stack: {
           children: [
             {
               component: {
-                name: route,
+                name: SCREENS.HOME,
                 options: {
                   statusBar: {
                     style: 'dark',
@@ -53,6 +45,12 @@ class Profile extends React.Component {
         }
       }
     });
+  };
+
+  _handleSubmit = data => {
+    const { actions } = this.props;
+
+    actions.postRegister({ ...data, password_confirmation: data.password, role: 1 }, this._handleGotoHome);
   };
 
   render() {
@@ -74,28 +72,21 @@ class Profile extends React.Component {
         />
 
         <View style={styles.content}>
-          <Text style={styles.h1}>Settings</Text>
-          <Text style={styles.title}>Personal Information</Text>
-
-          <FormProfile
-            initialValues={profile.data}
-            onSubmit={this._handleSubmit}
-            handleForget={this._handleForget}
-          />
+          <AddAdminForm onSubmit={this._handleSubmit} />
         </View>
       </View>
     );
   }
 }
 
-Profile.defaultProps = {
+AddCategory.defaultProps = {
   actions: {},
   profile: {}
 };
 
-Profile.propTypes = {
+AddCategory.propTypes = {
   actions: PropTypes.object,
   profile: PropTypes.object
 };
 
-export default Profile;
+export default AddCategory;
