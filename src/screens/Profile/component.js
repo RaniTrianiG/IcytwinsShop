@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 
-import { Button } from 'react-native-elements';
-import { Table, Row, TableWrapper, Cell } from 'react-native-table-component';
 import { ToastAndroid } from 'react-native';
 import FormProfile from '../../components/forms/Profile';
 

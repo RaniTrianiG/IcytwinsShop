@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, ScrollView, FlatList } from 'react-native';
+import { View, TouchableOpacity, Image, Text, ScrollView, Linking } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native-elements';
 import { API } from 'react-native-dotenv';
 import BackIcon from '../../../assets/png/icon-back.png';
 
@@ -15,7 +14,7 @@ import { SCREENS } from '../../../constants';
 
 import styles from './styles';
 
-class History extends React.Component {
+class DetailHistory extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
     actions.getData();
@@ -66,38 +65,19 @@ class History extends React.Component {
       }
     });
   };
+  openWA = () => {
+    Linking.openURL('https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0')
+  }
+
+  _handleSubmit = () => {
+    // const { actions, selectedData } = this.props;
+    // actions.getData();
+  };
 
   _handleBack = () => {
     const { componentId } = this.props;
 
     Navigation.pop(componentId);
-  };
-
-  _renderFlatList = item => {
-    const status = ['New Order', 'Pending', 'Approved', 'Delivered'];
-    return (
-      <TouchableOpacity style={styles.category}>
-        <View style={styles.viewTxt}>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Order #{item.item.invoice}</Text>
-            <Text style={styles.buttonText}>Tracking Number:</Text>
-            <Text style={styles.buttonText}>Quantity:</Text>
-            <Text style={styles.buttonText}>Total Amount:</Text>
-            <TouchableOpacity onPress={this._handleTabBtnPress({ route: SCREENS.DETAIL_HISTORY })} style={styles.buttonDetail}>
-              <Text style={styles.buttonText}>Details</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.viewChange}>
-            <Text style={styles.textBold}>05-12-2019</Text>
-            <Text style={styles.textChange}>{item.item.no_resi ?? '-'}</Text>
-            <Text style={styles.textChange}>{item.item.items.length}</Text>
-            <Text style={styles.textBold}>{item.item.total}</Text>
-
-            <Text style={styles.textStatus}>{status[item.item.status]}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
   };
 
   render() {
@@ -111,13 +91,65 @@ class History extends React.Component {
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
-            <Text style={styles.title}>History Orders</Text>
-            <FlatList
-              data={profile?.data?.transactions ?? []}
-              keyExtractor={(_, idx) => `item-${idx}`}
-              renderItem={this._renderFlatList}
-            />
+            <Text style={styles.title}>Orders Details </Text>
+            <View style={styles.categorys}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Order №1947034</Text>
+                <Text style={styles.textChange}>Tracking Number:</Text>
+              </View>
+              <View style={styles.viewChange}>
+                <Text style={styles.textChange}>05-12-2019</Text>
+                <Text style={styles.textBold}>IW3475453455</Text>
+
+                <Text style={styles.textStatus}>Delivered</Text>
+              </View>
+            </View>
+            <View style={styles.viewTxt}>
+              <TouchableOpacity
+                onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
+                style={styles.category}
+              >
+                <View style={styles.titleCategory}>
+                  <Image
+                    style={styles.icon}
+                    source={IconHome}
+                  />
+                </View>
+                <View style={styles.menuIcon}>
+
+                  <View style={styles.button}>
+                    <Text style={styles.buttonText}>Bouquet</Text>
+                    <Text style={styles.textChange}>Category: Flower</Text>
+                    <Text style={styles.textChange}>Units: 1</Text>
+                  </View>
+                  <View style={styles.positionPrice}>
+                    <Text style={styles.buttonText}>Rp385.000</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
           </ScrollView>
+          <View style={styles.categoryse}>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Order Information</Text>
+              <Text style={styles.textChange}>Payment Method:</Text>
+              <Text style={styles.textChange}>Payment Method:</Text>
+              <Text style={styles.textChange}>Payment Method:</Text>
+              <TouchableOpacity onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })} style={styles.buttonDetail}>
+                <Text style={styles.buttonText}>Reorder</Text>
+              </TouchableOpacity>
+
+            </View>
+            <View style={styles.viewChange}>
+              <Text style={styles.textChange}></Text>
+              <Text style={styles.textBold}>Transfer Manual</Text>
+              <Text style={styles.textBold}>Transfer Manual</Text>
+              <Text style={styles.textBold}>Transfer Manual</Text>
+              <TouchableOpacity onPress={this.openWA} style={styles.buttonDetailFeedback}>
+                <Text style={styles.buttonTextFeedback}>Feedback</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         <View style={styles.bar}>
           <TouchableOpacity
@@ -132,7 +164,7 @@ class History extends React.Component {
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Home</Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}
@@ -173,18 +205,18 @@ class History extends React.Component {
   }
 }
 
-History.defaultProps = {
+DetailHistory.defaultProps = {
   componentId: 'categoryuserscreen',
   selectedData: {},
   actions: {},
   category: {}
 };
 
-History.propTypes = {
+DetailHistory.propTypes = {
   componentId: PropTypes.string,
   selectedData: PropTypes.object,
   actions: PropTypes.object,
   category: PropTypes.object
 };
 
-export default History;
+export default DetailHistory;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, StatusBar } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { Navigation } from 'react-native-navigation';
@@ -13,12 +13,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    marginVertical: 30
+    // marginVertical: 30,
+    backgroundColor: '#010035'
   },
   footer: {
     fontSize: 18,
     fontWeight: '400',
-    lineHeight: 23
+    lineHeight: 23,
+    paddingBottom: 20,
+    color: '#fff'
   },
   icon: {
     flex: 1,
@@ -66,7 +69,9 @@ class Initializer extends Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
+        <StatusBar barStyle={StatusBar.setBarStyle('dark-content')} backgroundColor={StatusBar.setBackgroundColor('#010035')} />
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <View style={styles.logo}>
             <Image source={logo} style={styles.icon} onLoadEnd={this._checkCredential} />
