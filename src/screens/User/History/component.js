@@ -23,7 +23,7 @@ class History extends React.Component {
     actions.getProfile();
   }
 
-  _handleTabBtnPress = ({ route }) => () => {
+  _handleTabBtnPress = ({ route, item }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -31,6 +31,8 @@ class History extends React.Component {
             {
               component: {
                 name: route,
+                passProps: item,
+
                 options: {
                   statusBar: {
                     style: 'dark',
@@ -83,15 +85,18 @@ class History extends React.Component {
             <Text style={styles.buttonText}>Tracking Number:</Text>
             <Text style={styles.buttonText}>Quantity:</Text>
             <Text style={styles.buttonText}>Total Amount:</Text>
-            <TouchableOpacity onPress={this._handleTabBtnPress({ route: SCREENS.DETAIL_HISTORY })} style={styles.buttonDetail}>
+            <TouchableOpacity
+              onPress={this._handleTabBtnPress({ route: SCREENS.DETAIL_HISTORY, item })}
+              style={styles.buttonDetail}
+            >
               <Text style={styles.buttonText}>Details</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.viewChange}>
-            <Text style={styles.textBold}>05-12-2019</Text>
+            <Text style={styles.textBold}>{new Date(item?.item?.created_at).toLocaleDateString('ID')}</Text>
             <Text style={styles.textChange}>{item.item.no_resi ?? '-'}</Text>
             <Text style={styles.textChange}>{item.item.items.length}</Text>
-            <Text style={styles.textBold}>{item.item.total}</Text>
+            <Text style={styles.textBold}>{this.convertToRupiah(item.item.total)}</Text>
 
             <Text style={styles.textStatus}>{status[item.item.status]}</Text>
           </View>
@@ -99,6 +104,20 @@ class History extends React.Component {
       </TouchableOpacity>
     );
   };
+
+  convertToRupiah(angka) {
+    let rupiah = '';
+    const angkarev = angka
+      .toString()
+      .split('')
+      .reverse()
+      .join('');
+    for (let i = 0; i < angkarev.length; i += 1) if (i % 3 === 0) rupiah += `${angkarev.substr(i, 3)}.`;
+    return `Rp. ${rupiah
+      .split('', rupiah.length - 1)
+      .reverse()
+      .join('')}`;
+  }
 
   render() {
     const { selectedData, profile, category } = this.props;
@@ -132,7 +151,7 @@ class History extends React.Component {
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Home</Text>
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}

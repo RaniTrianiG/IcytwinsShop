@@ -66,8 +66,10 @@ class DetailHistory extends React.Component {
     });
   };
   openWA = () => {
-    Linking.openURL('https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0')
-  }
+    Linking.openURL(
+      'https://api.whatsapp.com/send/?phone=62895412955704&text=Hi,%20saya%20tertarik%20dengan%20produk%20icytwins.beauty!&app_absent=0'
+    );
+  };
 
   _handleSubmit = () => {
     // const { actions, selectedData } = this.props;
@@ -80,9 +82,24 @@ class DetailHistory extends React.Component {
     Navigation.pop(componentId);
   };
 
+  convertToRupiah(angka) {
+    let rupiah = '';
+    const angkarev = angka
+      .toString()
+      .split('')
+      .reverse()
+      .join('');
+    for (let i = 0; i < angkarev.length; i += 1) if (i % 3 === 0) rupiah += `${angkarev.substr(i, 3)}.`;
+    return `Rp. ${rupiah
+      .split('', rupiah.length - 1)
+      .reverse()
+      .join('')}`;
+  }
+
   render() {
-    const { selectedData, profile, category } = this.props;
-    console.log(this.props);
+    const { selectedData, profile, category, item } = this.props;
+    const status = ['New Order', 'Pending', 'Approved', 'Delivered'];
+    console.log(item);
     return (
       <View style={styles.container}>
         <View style={styles.content}>
@@ -94,57 +111,61 @@ class DetailHistory extends React.Component {
             <Text style={styles.title}>Orders Details </Text>
             <View style={styles.categorys}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Order №1947034</Text>
+                <Text style={styles.buttonText}>Order #{item?.invoice}</Text>
                 <Text style={styles.textChange}>Tracking Number:</Text>
               </View>
               <View style={styles.viewChange}>
-                <Text style={styles.textChange}>05-12-2019</Text>
-                <Text style={styles.textBold}>IW3475453455</Text>
+                <Text style={styles.textChange}>{new Date(item?.created_at).toLocaleDateString('ID')}</Text>
+                <Text style={styles.textBold}>{item?.no_resi ?? '-'}</Text>
 
-                <Text style={styles.textStatus}>Delivered</Text>
+                <Text style={styles.textStatus}>{status[(item?.status)]}</Text>
               </View>
             </View>
             <View style={styles.viewTxt}>
-              <TouchableOpacity
-                onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
-                style={styles.category}
-              >
-                <View style={styles.titleCategory}>
-                  <Image
-                    style={styles.icon}
-                    source={IconHome}
-                  />
-                </View>
-                <View style={styles.menuIcon}>
-
-                  <View style={styles.button}>
-                    <Text style={styles.buttonText}>Bouquet</Text>
-                    <Text style={styles.textChange}>Category: Flower</Text>
-                    <Text style={styles.textChange}>Units: 1</Text>
-                  </View>
-                  <View style={styles.positionPrice}>
-                    <Text style={styles.buttonText}>Rp385.000</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              {item?.items.map(i => {
+                console.log(i);
+                const thumbnail = i.product.imgs.find(({ is_thumbnail }) => is_thumbnail);
+                const imgUrl = `${API}/storage/${i.product.id}/${thumbnail?.img ?? ''}`;
+                return (
+                  <TouchableOpacity
+                    onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
+                    key={i.id}
+                    style={styles.category}
+                  >
+                    <View style={styles.titleCategory}>
+                      <Image style={styles.icon} source={{ uri: imgUrl }} />
+                    </View>
+                    <View style={styles.menuIcon}>
+                      <View style={styles.button}>
+                        <Text style={styles.buttonText}>{i.product.name}</Text>
+                        <Text style={styles.textChange}>Category: {i.product.category.name}</Text>
+                        <Text style={styles.textChange}>Units: {i.qty}</Text>
+                      </View>
+                      <View style={styles.positionPrice}>
+                        <Text style={styles.buttonText}>{this.convertToRupiah(i.price)}</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
           </ScrollView>
           <View style={styles.categoryse}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Order Information</Text>
-              <Text style={styles.textChange}>Payment Method:</Text>
-              <Text style={styles.textChange}>Payment Method:</Text>
-              <Text style={styles.textChange}>Payment Method:</Text>
-              <TouchableOpacity onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })} style={styles.buttonDetail}>
+              <Text style={styles.textChange}>Shipping Address:</Text>
+              <Text style={styles.textChange}>Total Amount (+ Shipping):</Text>
+              <TouchableOpacity
+                onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
+                style={styles.buttonDetail}
+              >
                 <Text style={styles.buttonText}>Reorder</Text>
               </TouchableOpacity>
-
             </View>
             <View style={styles.viewChange}>
-              <Text style={styles.textChange}></Text>
-              <Text style={styles.textBold}>Transfer Manual</Text>
-              <Text style={styles.textBold}>Transfer Manual</Text>
-              <Text style={styles.textBold}>Transfer Manual</Text>
+              <Text style={styles.textChange} />
+              <Text style={styles.textBold}>{item.delivery_address}</Text>
+              <Text style={styles.textBold}>{this.convertToRupiah(item.total)}</Text>
               <TouchableOpacity onPress={this.openWA} style={styles.buttonDetailFeedback}>
                 <Text style={styles.buttonTextFeedback}>Feedback</Text>
               </TouchableOpacity>
