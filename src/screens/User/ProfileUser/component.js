@@ -38,10 +38,6 @@ class ProfileUser extends React.Component {
     ToastAndroid.showWithGravityAndOffset('Profile updated!', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
   };
 
-  _handleSubmit = () => {
-    this._handleTabBtnPress({ route: SCREENS.PRODUCT });
-  };
-
   _handleTabBtnPress = ({ route }) => () => {
     Navigation.setRoot({
       root: {
