@@ -15,7 +15,7 @@ class Forget extends React.Component {
   _handleSubmit = data => {
     const { actions } = this.props;
 
-    actions.postForget(data.username);
+    actions.postForget(data.username, this._handleBack);
   };
 
   _handleBack = () => {
