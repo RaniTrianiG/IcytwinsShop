@@ -110,7 +110,7 @@ class Detail extends React.Component {
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           <FlatList
-            data={[]}
+            data={profile?.data?.carts ?? []}
             contentContainerStyle={{ paddingHorizontal: 16 }}
             keyExtractor={(_, idx) => `item-${idx}`}
             renderItem={this._renderItem}
