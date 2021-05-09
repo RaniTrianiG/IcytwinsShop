@@ -33,7 +33,8 @@ const screens = {
 
   PROFILE: 'app.profile',
   PROFILE_USER: 'app.user.profileuser',
-  DETAIL_CATEGORY_USER: 'app.category.detailcategoryuser'
+  DETAIL_CATEGORY_USER: 'app.category.detailcategoryuser',
+  HISTORY: 'app.user.history'
 };
 
 export default screens;

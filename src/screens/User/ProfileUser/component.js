@@ -108,6 +108,18 @@ class ProfileUser extends React.Component {
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+           onPress={this._handleTabBtnPress({ route: SCREENS.HISTORY })}
+            style={{ alignItems: 'center' }}
+          >
+            <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
+              <Image
+                style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+                source={IconUser}
+              />
+            </View>
+            <Text style={{ fontSize: 10, lineHeight: 10 }}>History</Text>
+          </TouchableOpacity>
           <TouchableOpacity disabled style={{ alignItems: 'center' }}>
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
               <Image

@@ -14,7 +14,7 @@ import { SCREENS } from '../../../constants';
 
 import styles from './styles';
 
-class CategoryUser extends React.Component {
+class History extends React.Component {
   componentDidMount() {
     const { actions } = this.props;
     actions.getData();
@@ -22,7 +22,7 @@ class CategoryUser extends React.Component {
     actions.getProfile();
   }
 
-  _handleTabBtnPress = ({ route, item = null }) => () => {
+  _handleTabBtnPress = ({ route }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -30,7 +30,6 @@ class CategoryUser extends React.Component {
             {
               component: {
                 name: route,
-                passProps: item,
                 options: {
                   statusBar: {
                     style: 'dark',
@@ -80,9 +79,10 @@ class CategoryUser extends React.Component {
 
   _renderFlatList = item => {
     const imgUrl = `${API}/category/${item.item.id}.jpg`;
+    console.log(imgUrl);
     return (
       <TouchableOpacity
-        onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME, item })}
+        onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)}
         style={styles.category}
       >
         <View style={styles.titleCategory}>
@@ -111,17 +111,31 @@ class CategoryUser extends React.Component {
               <Image source={BackIcon} style={styles.img} />
             </TouchableOpacity>
 
-            <Text style={styles.title}>Categories</Text>
-            <Button
-              title="SUMMER SALES Up to 50% off"
-              buttonStyle={styles.button}
-              titleStyle={styles.buttonText}
-            />
-            <FlatList
-              data={category?.data ?? []}
-              keyExtractor={(_, idx) => `item-${idx}`}
-              renderItem={this._renderFlatList}
-            />
+            <Text style={styles.title}>History Orders</Text>
+            <TouchableOpacity
+              style={styles.category}
+            >
+              <View style={styles.viewTxt}>
+                <View style={styles.button}>
+                  <Text style={styles.buttonText}>Order №1947034</Text>
+                  <Text style={styles.buttonText}>Tracking Number:</Text>
+                  <Text style={styles.buttonText}>Quantity:</Text>
+                  <Text style={styles.buttonText}>Total Amount:</Text>
+                  <TouchableOpacity style={styles.buttonDetail}>
+                    <Text style={styles.buttonText}>Details</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.viewChange}>
+                  <Text style={styles.textBold}>05-12-2019</Text>
+                  <Text style={styles.textChange}>IW3475453455</Text>
+                  <Text style={styles.textChange}>3</Text>
+                  <Text style={styles.textBold}>225K</Text>
+
+                  <Text style={styles.textStatus}>Delivered</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
           </ScrollView>
         </View>
         <View style={styles.bar}>
@@ -177,18 +191,18 @@ class CategoryUser extends React.Component {
   }
 }
 
-CategoryUser.defaultProps = {
+History.defaultProps = {
   componentId: 'categoryuserscreen',
   selectedData: {},
   actions: {},
   category: {}
 };
 
-CategoryUser.propTypes = {
+History.propTypes = {
   componentId: PropTypes.string,
   selectedData: PropTypes.object,
   actions: PropTypes.object,
   category: PropTypes.object
 };
 
-export default CategoryUser;
+export default History;
