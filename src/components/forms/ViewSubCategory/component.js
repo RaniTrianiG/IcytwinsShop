@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import { Field } from 'redux-form';
 import { Button } from 'react-native-elements';
@@ -15,7 +15,7 @@ const Component = props => {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={style.inputContainer}>
+      <ScrollView contentContainerStyle={style.inputContainer}>
         <Field component={InputField} name="category" placeholder="Category Name" label="Category Name" />
         <Field
           component={InputField}
@@ -23,7 +23,7 @@ const Component = props => {
           placeholder="Parent Category"
           label="Parent Category"
         />
-      </View>
+      </ScrollView>
 
       <View style={{ flexDirection: 'row', marginHorizontal: 10 }}>
         <View style={{ flex: 2 }}>

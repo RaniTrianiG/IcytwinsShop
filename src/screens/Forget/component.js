@@ -14,7 +14,8 @@ import styles from './styles';
 class Forget extends React.Component {
   _handleSubmit = data => {
     const { actions } = this.props;
-    actions.postForget(data);
+
+    actions.postForget(data.username);
   };
 
   _handleBack = () => {

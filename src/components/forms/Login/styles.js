@@ -5,7 +5,6 @@ const style = StyleSheet.create({
     backgroundColor: '#DB3022',
     borderRadius: 30,
     marginHorizontal: 14,
-    marginTop: 30,
     paddingVertical: 14
   },
   buttonText: {
@@ -15,8 +14,35 @@ const style = StyleSheet.create({
     lineHeight: 20,
     textTransform: 'uppercase'
   },
+
+  forget: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginBottom: 30,
+    marginHorizontal: 16,
+    marginTop: 4
+  },
+  forgetBtn: {
+    aspectRatio: 1,
+    width: 24
+  },
+  forgetBtnImg: {
+    flex: 1,
+    height: null,
+    resizeMode: 'contain',
+    width: null
+  },
+  forgetText: {
+    fontFamily: 'serif',
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 20,
+    marginRight: 3
+  },
+
   inputContainer: {
-    marginHorizontal: 16
+    paddingHorizontal: 16
   }
 });
 

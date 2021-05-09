@@ -17,7 +17,7 @@ const style = StyleSheet.create({
   },
 
   inputContainer: {
-    marginHorizontal: 16
+    paddingHorizontal: 16
   },
   instruction: {
     fontFamily: 'serif',

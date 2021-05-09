@@ -4,6 +4,7 @@ const api = {
   LOGOUT: '/api/auth/logout',
   DASHBOARD: '/api/dashboard',
   PROFILE: '/api/auth/profile',
+  FORGET: '/api/user/sendresetcode',
 
   USER: '/api/user',
 

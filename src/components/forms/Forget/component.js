@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import { Field } from 'redux-form';
 import { Button } from 'react-native-elements';
@@ -15,12 +15,12 @@ const Component = props => {
 
   return (
     <View>
-      <View style={style.inputContainer}>
+      <ScrollView contentContainerStyle={style.inputContainer}>
         <Text style={style.instruction}>
           Please, enter your email address. You will receive a link to create a new password via email.
         </Text>
         <Field component={InputField} name="username" placeholder="Email" label="Email" />
-      </View>
+      </ScrollView>
 
       <Button onPress={handleSubmit} title="Send" buttonStyle={style.button} titleStyle={style.buttonText} />
     </View>

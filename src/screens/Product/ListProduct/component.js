@@ -20,10 +20,6 @@ class ListProduct extends React.Component {
   }
 
   _handleViewDetail = data => () => {
-    actions.getProfile();
-  }
-
-  _handleViewDetail = () => () => {
     const { componentId } = this.props;
 
     Navigation.push(componentId, {
@@ -96,7 +92,17 @@ class ListProduct extends React.Component {
     const { product, profile } = this.props;
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data?.name?.split(" ").map((i) => i[0]).join("").substring(0, 2) ?? null} />
+        <Navbar
+          fullName={profile?.data?.name ?? null}
+          mail={profile?.data.email ?? null}
+          initialName={
+            profile?.data?.name
+              ?.split(' ')
+              .map(i => i[0])
+              .join('')
+              .substring(0, 2) ?? null
+          }
+        />
 
         <View style={styles.content}>
           <Text style={styles.title}>Products</Text>
@@ -132,13 +138,15 @@ class ListProduct extends React.Component {
 ListProduct.defaultProps = {
   componentId: 'listproductscreen',
   actions: {},
-  product: {}
+  product: {},
+  profile: {}
 };
 
 ListProduct.propTypes = {
   componentId: PropTypes.string,
   actions: PropTypes.object,
-  product: PropTypes.object
+  product: PropTypes.object,
+  profile: PropTypes.object
 };
 
 export default ListProduct;

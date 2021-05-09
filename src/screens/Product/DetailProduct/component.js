@@ -30,9 +30,20 @@ class DetailProduct extends React.Component {
 
   render() {
     const { profile } = this.props;
+
     return (
       <View style={styles.container}>
-        <Navbar fullName={profile?.data?.name ?? null} mail={profile?.data.email ?? null} initialName={profile?.data?.name?.split(" ").map((i) => i[0]).join("").substring(0, 2) ?? null}/>
+        <Navbar
+          fullName={profile?.data?.name ?? null}
+          mail={profile?.data.email ?? null}
+          initialName={
+            profile?.data?.name
+              ?.split(' ')
+              .map(i => i[0])
+              .join('')
+              .substring(0, 2) ?? null
+          }
+        />
 
         <View style={styles.content}>
           <DetailProductForm
@@ -47,13 +58,15 @@ class DetailProduct extends React.Component {
 }
 
 DetailProduct.defaultProps = {
-  componentId: 'detailproductscreen'
-  // actions: {}
+  componentId: 'detailproductscreen',
+  profile: {},
+  actions: {}
 };
 
 DetailProduct.propTypes = {
-  componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  profile: PropTypes.object,
+  actions: PropTypes.object
 };
 
 export default DetailProduct;

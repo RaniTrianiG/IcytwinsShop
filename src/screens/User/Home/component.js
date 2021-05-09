@@ -105,7 +105,7 @@ class Home extends React.Component {
           }}
         >
           <Image
-            style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+            style={{ width: null, height: null, flex: 1, resizeMode: 'cover' }}
             source={{ uri: imgUrl }}
           />
         </TouchableOpacity>
@@ -116,8 +116,7 @@ class Home extends React.Component {
 
   render() {
     const { data, item } = this.props;
-    console.log(item);
-    console.log(this.props);
+
     return (
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
@@ -258,13 +257,15 @@ class Home extends React.Component {
 Home.defaultProps = {
   componentId: 'usehomescreen',
   actions: {},
-  data: {}
+  data: {},
+  item: {}
 };
 
 Home.propTypes = {
   componentId: PropTypes.string,
   actions: PropTypes.object,
-  data: PropTypes.object
+  data: PropTypes.object,
+  item: PropTypes.object
 };
 
 export default Home;

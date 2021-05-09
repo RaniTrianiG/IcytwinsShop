@@ -1,8 +1,10 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
+import { API } from 'react-native-dotenv';
 
 import PropTypes from 'prop-types';
 import { SCREENS } from '../../../constants';
@@ -61,38 +63,46 @@ class Detail extends React.Component {
     );
   };
 
-  _renderItem = ({ item }) => (
-    <View
-      style={{
-        overflow: 'hidden',
-        height: 104,
-        marginBottom: 24,
-        backgroundColor: '#fff',
-        marginRight: 16,
-        borderRadius: 10,
-        flexDirection: 'row',
-        elevation: 2
-      }}
-    >
-      <View style={{ height: '100%', aspectRatio: 1, backgroundColor: '#aaa' }}>
-        <Image />
-      </View>
-      <View style={{ flex: 1, padding: 12 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ flex: 1 }}>
-            <Text style={{ fontSize: 16, fontWeight: '600' }}>{item?.product?.name ?? ''}</Text>
-            <Text numberOfLines={2} style={{ fontSize: 11, marginTop: 4 }}>
-              {item?.product?.description ?? ''}
-            </Text>
+  _renderItem = ({ item }) => {
+    const thumbnail = item.product.imgs.find(({ is_thumbnail }) => is_thumbnail);
+    const imgUrl = `${API}/storage/${item.product.id}/${thumbnail?.img ?? ''}`;
+
+    return (
+      <View
+        style={{
+          overflow: 'hidden',
+          height: 104,
+          marginBottom: 24,
+          backgroundColor: '#fff',
+          marginRight: 16,
+          borderRadius: 10,
+          flexDirection: 'row',
+          elevation: 2
+        }}
+      >
+        <View style={{ height: '100%', aspectRatio: 1, backgroundColor: '#aaa' }}>
+          <Image
+            source={{ uri: imgUrl }}
+            style={{ width: null, height: null, flex: 1, resizeMode: 'cover' }}
+          />
+        </View>
+        <View style={{ flex: 1, padding: 12 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flex: 1 }}>
+              <Text style={{ fontSize: 16, fontWeight: '600' }}>{item?.product?.name ?? ''}</Text>
+              <Text numberOfLines={2} style={{ fontSize: 11, marginTop: 4 }}>
+                {item?.product?.description ?? ''}
+              </Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+            <Text style={{ fontFamily: 'serif', fontSize: 14, fontWeight: '700' }}>{`Rp.${item?.product
+              ?.price ?? ''}`}</Text>
           </View>
         </View>
-        <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-          <Text style={{ fontFamily: 'serif', fontSize: 14, fontWeight: '700' }}>{`Rp.${item?.product
-            ?.price ?? ''}`}</Text>
-        </View>
       </View>
-    </View>
-  );
+    );
+  };
 
   _renderEmptyData = () => (
     <View>
