@@ -9,7 +9,7 @@ import BackIcon from '../../../assets/png/icon-back.png';
 
 import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
-import IconUser from '../../../assets/png/iconUser.png';
+import IconUser from '../../../assets/png/icon-user.png';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
@@ -22,7 +22,7 @@ class CategoryUser extends React.Component {
     actions.getProfile();
   }
 
-  _handleTabBtnPress = ({ route }) => () => {
+  _handleTabBtnPress = ({ route, item = null }) => () => {
     Navigation.setRoot({
       root: {
         stack: {
@@ -30,6 +30,7 @@ class CategoryUser extends React.Component {
             {
               component: {
                 name: route,
+                passProps: item,
                 options: {
                   statusBar: {
                     style: 'dark',
@@ -79,10 +80,9 @@ class CategoryUser extends React.Component {
 
   _renderFlatList = item => {
     const imgUrl = `${API}/category/${item.item.id}.jpg`;
-    console.log(imgUrl);
     return (
       <TouchableOpacity
-        onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)}
+        onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME, item })}
         style={styles.category}
       >
         <View style={styles.titleCategory}>

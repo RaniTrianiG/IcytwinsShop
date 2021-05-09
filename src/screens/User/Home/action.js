@@ -4,7 +4,7 @@ import { API } from 'react-native-dotenv';
 import { ACTIONS, API as URLS } from '../../../constants';
 import { reqOption } from '../../../utils';
 
-export const getData = successCallback => async dispatch => {
+export const getData = (categoryId = null, successCallback) => async dispatch => {
   const defaultOpt = await reqOption();
   dispatch({ type: ACTIONS.GET_PRODUCT_START });
 
@@ -13,7 +13,10 @@ export const getData = successCallback => async dispatch => {
     headers: defaultOpt.headers
   };
 
-  fetch(API + URLS.PRODUCT, options)
+  const apiUrl =
+    categoryId != null ? `${API + URLS.PRODUCT}?category_id=${categoryId}` : `${API + URLS.PRODUCT}`;
+  console.log(apiUrl);
+  fetch(apiUrl, options)
     .then(response =>
       response.text().then(resData => ({
         data: resData === '' ? {} : JSON.parse(resData),

@@ -18,9 +18,9 @@ import styles from './styles';
 
 class Home extends React.Component {
   componentDidMount() {
-    const { actions } = this.props;
+    const { actions, item } = this.props;
 
-    actions.getData();
+    actions.getData(item?.id ?? null);
   }
 
   _navigateToDetail = item => () => {
@@ -91,27 +91,30 @@ class Home extends React.Component {
     const imgUrl = `${API}/storage/${item.id}/${thumbnail?.img ?? ''}`;
 
     return (
-      <TouchableOpacity
-        onPress={this._navigateToDetail(item)}
-        style={{
-          overflow: 'hidden',
-          width: 150,
-          aspectRatio: 1,
-          backgroundColor: '#aaa',
-          marginRight: 16,
-          borderRadius: 5
-        }}
-      >
-        <Image
-          style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
-          source={{ uri: imgUrl }}
-        />
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity
+          onPress={this._navigateToDetail(item)}
+          style={{
+            overflow: 'hidden',
+            width: 150,
+            aspectRatio: 1,
+            backgroundColor: '#aaa',
+            marginRight: 16,
+            borderRadius: 5
+          }}
+        >
+          <Image
+            style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
+            source={{ uri: imgUrl }}
+          />
+        </TouchableOpacity>
+        <Text>{item.name}</Text>
+      </View>
     );
   };
 
   render() {
-    const { data } = this.props;
+    const { data, item } = this.props;
 
     return (
       <View style={styles.container}>
@@ -166,9 +169,11 @@ class Home extends React.Component {
                 style={{ marginHorizontal: 14, marginTop: 33, flexDirection: 'row', alignItems: 'center' }}
               >
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 34, fontWeight: 'bold', lineHeight: 45.05 }}>New</Text>
+                  <Text style={{ fontSize: 34, fontWeight: 'bold', lineHeight: 45.05 }}>
+                    {item?.name ?? 'New'}
+                  </Text>
                   <Text style={{ fontFamily: 'serif', fontSize: 11, color: '#9B9B9B' }}>
-                    You’ve never seen it before!
+                    {item?.description ?? 'You’ve never seen it before!'}
                   </Text>
                 </View>
               </View>
