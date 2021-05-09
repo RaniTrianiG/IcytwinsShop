@@ -26,6 +26,7 @@ import CategoryUser from '../screens/Category/CategoryUser';
 import Profile from '../screens/Profile';
 
 import Transaction from '../screens/Transaction/ListTransaction';
+import DetailTransaction from '../screens/Transaction/DetailTransaction';
 
 import UserHome from '../screens/User/Home';
 import UserDetailProduct from '../screens/User/Detail';
@@ -68,6 +69,7 @@ const registerScreens = () => {
   Navigation.registerComponentWithRedux(SCREENS.DETAIL_PRODUCT, () => ProductDetail, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.TRANSACTION, () => Transaction, Provider, store);
+  Navigation.registerComponentWithRedux(SCREENS.DETAIL_TRANSACTION, () => DetailTransaction, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.USER_HOME, () => UserHome, Provider, store);
   Navigation.registerComponentWithRedux(
@@ -82,10 +84,19 @@ const registerScreens = () => {
   Navigation.registerComponentWithRedux(SCREENS.CATEGORYUSER, () => CategoryUser, Provider, store);
 
   Navigation.registerComponentWithRedux(SCREENS.PROFILE_USER, () => ProfileUser, Provider, store);
-  Navigation.registerComponentWithRedux(SCREENS.DETAIL_CATEGORY_USER, () => DetailCategoryUser, Provider, store);
+  Navigation.registerComponentWithRedux(
+    SCREENS.DETAIL_CATEGORY_USER,
+    () => DetailCategoryUser,
+    Provider,
+    store
+  );
+  Navigation.registerComponentWithRedux(
+    SCREENS.DETAIL_CATEGORY_USER,
+    () => DetailCategoryUser,
+    Provider,
+    store
+  );
   Navigation.registerComponentWithRedux(SCREENS.HISTORY, () => History, Provider, store);
-
-
 };
 
 export default registerScreens;
