@@ -7,9 +7,10 @@ import { Button } from 'react-native-elements';
 import { API } from 'react-native-dotenv';
 import BackIcon from '../../../assets/png/icon-back.png';
 
-import IconHome from '../../../assets/png/icon-home-red.png';
+import IconHome from '../../../assets/png/icon-home.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import IconUser from '../../../assets/png/icon-user.png';
+import IconHistory from '../../../assets/png/icon-history-red.png';
 import { SCREENS } from '../../../constants';
 
 import styles from './styles';
@@ -125,7 +126,6 @@ class History extends React.Component {
         </View>
         <View style={styles.bar}>
           <TouchableOpacity
-            disabled
             onPress={this._handleTabBtnPress({ route: SCREENS.USER_HOME })}
             style={{ alignItems: 'center' }}
           >
@@ -135,8 +135,9 @@ class History extends React.Component {
                 source={IconHome}
               />
             </View>
-            <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>Home</Text>
+            <Text style={{ fontSize: 10, lineHeight: 10 }}>Home</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity
             onPress={this._handleTabBtnPress({ route: SCREENS.USER_CART })}
             style={{ alignItems: 'center' }}
@@ -147,16 +148,17 @@ class History extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            disabled
             onPress={this._handleTabBtnPress({ route: SCREENS.HISTORY })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
               <Image
                 style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
-                source={IconUser}
+                source={IconHistory}
               />
             </View>
-            <Text style={{ fontSize: 10, lineHeight: 10 }}>History</Text>
+            <Text style={{ fontSize: 10, lineHeight: 10, color: '#DB3022' }}>History</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={this._handleTabBtnPress({ route: SCREENS.PROFILE_USER })}

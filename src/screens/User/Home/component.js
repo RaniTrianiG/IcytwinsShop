@@ -13,6 +13,7 @@ import IconHome from '../../../assets/png/icon-home-red.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import Banner from '../../../assets/png/banner.png';
 import IconUser from '../../../assets/png/icon-user.png';
+import IconHistory from '../../../assets/png/icon-history.png';
 
 import styles from './styles';
 
@@ -230,7 +231,7 @@ class Home extends React.Component {
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
               <Image
                 style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
-                source={IconUser}
+                source={IconHistory}
               />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>History</Text>

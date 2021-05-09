@@ -7,6 +7,8 @@ import { Navigation } from 'react-native-navigation';
 
 // import { Button } from 'react-native-elements';
 
+import PropTypes from 'prop-types';
+import { ToastAndroid } from 'react-native';
 import FormProfile from '../../../components/forms/Profile';
 
 import BackIcon from '../../../assets/png/icon-back.png';
@@ -14,6 +16,7 @@ import BackIcon from '../../../assets/png/icon-back.png';
 import IconHome from '../../../assets/png/icon-home.png';
 import IconBag from '../../../assets/png/icon-bag.png';
 import IconUser from '../../../assets/png/icon-user-red.png';
+import IconHistory from '../../../assets/png/icon-history.png';
 
 import { SCREENS } from '../../../constants';
 
@@ -21,9 +24,19 @@ import styles from './styles';
 
 class ProfileUser extends React.Component {
   componentDidMount() {
-    // const { actions } = this.props;
-    // actions.getProfile();
+    const { actions } = this.props;
+
+    actions.getProfile();
   }
+
+  _handleSubmit = data => {
+    const { actions } = this.props;
+    actions.postUpdateProfile(data, this._handleFinishSubmit);
+  };
+
+  _handleFinishSubmit = res => {
+    ToastAndroid.showWithGravityAndOffset('Profile updated!', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50);
+  };
 
   _handleSubmit = () => {
     this._handleTabBtnPress({ route: SCREENS.PRODUCT });
@@ -58,7 +71,7 @@ class ProfileUser extends React.Component {
   };
 
   render() {
-    // const { profile } = this.props;
+    const { profile } = this.props;
 
     return (
       <View style={styles.container}>
@@ -74,7 +87,11 @@ class ProfileUser extends React.Component {
             <Text style={styles.h1}>Settings</Text>
             <Text style={styles.title}>Personal Information</Text>
 
-            <FormProfile onSubmit={this._handleSubmit} handleForget={this._handleForget} />
+            <FormProfile
+              initialValues={profile.data}
+              onSubmit={this._handleSubmit}
+              handleForget={this._handleForget}
+            />
           </ScrollView>
         </View>
         <View
@@ -109,13 +126,13 @@ class ProfileUser extends React.Component {
             <Text style={{ fontSize: 10, lineHeight: 10 }}>Bag</Text>
           </TouchableOpacity>
           <TouchableOpacity
-           onPress={this._handleTabBtnPress({ route: SCREENS.HISTORY })}
+            onPress={this._handleTabBtnPress({ route: SCREENS.HISTORY })}
             style={{ alignItems: 'center' }}
           >
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
               <Image
                 style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
-                source={IconUser}
+                source={IconHistory}
               />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>History</Text>
@@ -136,13 +153,13 @@ class ProfileUser extends React.Component {
 }
 
 ProfileUser.defaultProps = {
-  // componentId: 'profileuserscreen'
-  // actions: {}
+  componentId: 'profileuserscreen',
+  actions: {}
 };
 
 ProfileUser.propTypes = {
-  // componentId: PropTypes.string
-  // actions: PropTypes.object
+  componentId: PropTypes.string,
+  actions: PropTypes.object
 };
 
 export default ProfileUser;

@@ -10,6 +10,7 @@ import { SCREENS } from '../../../constants';
 import IconHome from '../../../assets/png/icon-home.png';
 import IconBag from '../../../assets/png/icon-bag-red.png';
 import IconUser from '../../../assets/png/icon-user.png';
+import IconHistory from '../../../assets/png/icon-history.png';
 
 import styles from './styles';
 
@@ -209,7 +210,7 @@ class Detail extends React.Component {
             <View style={{ width: 30, aspectRatio: 1, marginBottom: 5 }}>
               <Image
                 style={{ width: null, height: null, flex: 1, resizeMode: 'contain' }}
-                source={IconUser}
+                source={IconHistory}
               />
             </View>
             <Text style={{ fontSize: 10, lineHeight: 10 }}>History</Text>
