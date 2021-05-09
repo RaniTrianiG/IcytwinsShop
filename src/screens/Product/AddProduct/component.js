@@ -35,7 +35,7 @@ class AddProduct extends React.Component {
     });
   };
 
-  __handleSubmit = () => {};
+  _handleSubmit = () => {};
 
   _renderNames = data => (
     <View style={styles.tableRow}>
