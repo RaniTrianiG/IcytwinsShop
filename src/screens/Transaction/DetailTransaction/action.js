@@ -3,17 +3,18 @@ import { API } from 'react-native-dotenv';
 import { ACTIONS, API as URLS } from '../../../constants';
 import { reqOption } from '../../../utils';
 
-export const getTransactions = (status, successCallback) => async dispatch => {
+export const updateTransactions = (id, body, successCallback) => async dispatch => {
   const defaultOpt = await reqOption();
-  dispatch({ type: ACTIONS.GET_TRANSACTION_START });
+  dispatch({ type: ACTIONS.UPDATE_TRANSACTION_START });
 
   const options = {
-    method: 'get',
-    headers: defaultOpt.headers
+    method: 'put',
+    headers: defaultOpt.headers,
+    ...(body ? { body: JSON.stringify(body) } : null)
   };
 
   // eslint-disable-next-line no-undef
-  fetch(`${API + URLS.TRANSACTIONS}?status=${status}`, options)
+  fetch(`${API + URLS.TRANSACTIONS}/${id}`, options)
     .then(response =>
       response.text().then(resData => ({
         data: resData === '' ? {} : JSON.parse(resData),
@@ -21,13 +22,11 @@ export const getTransactions = (status, successCallback) => async dispatch => {
         httpStatus: response.status
       }))
     )
-    .then(res => {
-      const { data } = res;
-
-      dispatch({ type: ACTIONS.GET_TRANSACTION_SUCCESS, data: data.data });
-      successCallback(res);
+    .then(() => {
+      dispatch({ type: ACTIONS.UPDATE_TRANSACTION_SUCCESS });
+      successCallback();
     })
     .catch(error => {
-      dispatch({ type: ACTIONS.GET_TRANSACTION_FAILED, error });
+      dispatch({ type: ACTIONS.UPDATE_TRANSACTION_FAILED, error });
     });
 };
