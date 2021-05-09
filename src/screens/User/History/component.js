@@ -78,23 +78,27 @@ class History extends React.Component {
   };
 
   _renderFlatList = item => {
-    const imgUrl = `${API}/category/${item.item.id}.jpg`;
-    console.log(imgUrl);
+    const status = ['New Order', 'Pending', 'Approved', 'Delivered'];
     return (
-      <TouchableOpacity
-        onPress={this._handleTabBtnPress(SCREENS.DETAIL_CATEGORY_USER)}
-        style={styles.category}
-      >
-        <View style={styles.titleCategory}>
-          <Text style={styles.menuLongNum}>{item.item.name}</Text>
-        </View>
-        <View style={styles.menuIcon}>
-          <Image
-            style={styles.icon}
-            source={{
-              uri: imgUrl
-            }}
-          />
+      <TouchableOpacity style={styles.category}>
+        <View style={styles.viewTxt}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Order #{item.item.invoice}</Text>
+            <Text style={styles.buttonText}>Tracking Number:</Text>
+            <Text style={styles.buttonText}>Quantity:</Text>
+            <Text style={styles.buttonText}>Total Amount:</Text>
+            <TouchableOpacity style={styles.buttonDetail}>
+              <Text style={styles.buttonText}>Details</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewChange}>
+            <Text style={styles.textBold}>05-12-2019</Text>
+            <Text style={styles.textChange}>{item.item.no_resi ?? '-'}</Text>
+            <Text style={styles.textChange}>{item.item.items.length}</Text>
+            <Text style={styles.textBold}>{item.item.total}</Text>
+
+            <Text style={styles.textStatus}>{status[item.item.status]}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -112,30 +116,11 @@ class History extends React.Component {
             </TouchableOpacity>
 
             <Text style={styles.title}>History Orders</Text>
-            <TouchableOpacity
-              style={styles.category}
-            >
-              <View style={styles.viewTxt}>
-                <View style={styles.button}>
-                  <Text style={styles.buttonText}>Order №1947034</Text>
-                  <Text style={styles.buttonText}>Tracking Number:</Text>
-                  <Text style={styles.buttonText}>Quantity:</Text>
-                  <Text style={styles.buttonText}>Total Amount:</Text>
-                  <TouchableOpacity style={styles.buttonDetail}>
-                    <Text style={styles.buttonText}>Details</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.viewChange}>
-                  <Text style={styles.textBold}>05-12-2019</Text>
-                  <Text style={styles.textChange}>IW3475453455</Text>
-                  <Text style={styles.textChange}>3</Text>
-                  <Text style={styles.textBold}>225K</Text>
-
-                  <Text style={styles.textStatus}>Delivered</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-
+            <FlatList
+              data={profile?.data?.transactions ?? []}
+              keyExtractor={(_, idx) => `item-${idx}`}
+              renderItem={this._renderFlatList}
+            />
           </ScrollView>
         </View>
         <View style={styles.bar}>
