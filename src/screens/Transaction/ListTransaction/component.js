@@ -19,13 +19,14 @@ class ListProduct extends React.Component {
   }
 
   _handleViewDetail = data => () => {
-    const { componentId } = this.props;
+    const { componentId, status } = this.props;
 
     Navigation.push(componentId, {
       component: {
         name: SCREENS.DETAIL_TRANSACTION,
         passProps: {
-          selectedData: data
+          selectedData: data,
+          lastStatus: status
         },
         options: {
           statusBar: {
@@ -42,7 +43,7 @@ class ListProduct extends React.Component {
       style={[styles.tableRow, { backgroundColor: '#DB3022', justifyContent: 'center', borderRadius: 30 }]}
       onPress={this._handleViewDetail(data)}
     >
-      <Text style={styles.tableText}>View</Text>
+      <Text style={[styles.tableText, { color: '#fff' }]}>View</Text>
     </TouchableOpacity>
   );
 

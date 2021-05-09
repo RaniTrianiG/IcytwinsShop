@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: 13
+    marginTop: 13,
+    paddingHorizontal: 26,
+    justifyContent: 'center'
   },
 
   table: {
@@ -33,8 +35,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '700',
     lineHeight: 23.85,
-    marginBottom: 19,
-    paddingHorizontal: 26
+    marginBottom: 19
   }
 });
 

@@ -57,7 +57,7 @@ class Detail extends React.Component {
         courier: 'JNE',
         delivery_address: 'Jl. Sampora'
       },
-      this._handleTabBtnPress(SCREENS.USER_HOME)
+      this._handleTabBtnPress(SCREENS.SUCCESS_CHECKOUT)
     );
   };
 

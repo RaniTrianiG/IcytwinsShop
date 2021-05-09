@@ -3,7 +3,6 @@ import { View, TouchableOpacity, Image, Text, ScrollView, FlatList } from 'react
 
 import { Navigation } from 'react-native-navigation';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native-elements';
 import { API } from 'react-native-dotenv';
 import BackIcon from '../../../assets/png/icon-back.png';
 

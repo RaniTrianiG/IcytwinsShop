@@ -35,6 +35,7 @@ import ProfileUser from '../screens/User/ProfileUser';
 import DetailCategoryUser from '../screens/Category/DetailCategoryUser';
 import History from '../screens/User/History';
 import DetailHistory from '../screens/User/DetailHistory';
+import SuccessCheckout from '../screens/User/SuccessCheckout';
 
 
 const store = configureStore();
@@ -100,6 +101,8 @@ const registerScreens = () => {
   );
   Navigation.registerComponentWithRedux(SCREENS.HISTORY, () => History, Provider, store);
   Navigation.registerComponentWithRedux(SCREENS.DETAIL_HISTORY, () => DetailHistory, Provider, store);
+  Navigation.registerComponentWithRedux(SCREENS.SUCCESS_CHECKOUT, () => SuccessCheckout, Provider, store);
+
 
 };
 

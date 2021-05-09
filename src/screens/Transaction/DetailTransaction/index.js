@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from './action';
 import Component from './component';
 import { getProfile } from '../../Login/action';
+import { getTransactions } from '../ListTransaction/action';
 
 const mapStateToProps = state => {
   return {
@@ -12,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators({ ...actions, getProfile }, dispatch)
+    actions: bindActionCreators({ ...actions, getProfile, getTransactions }, dispatch)
   };
 };
 
