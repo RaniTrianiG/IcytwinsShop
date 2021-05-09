@@ -47,7 +47,6 @@ class Login extends React.Component {
 
   _handleSubmit = data => {
     const { actions } = this.props;
-
     actions.postLogin(data, actions.getProfile(this._navigateToDashboard));
   };
 
