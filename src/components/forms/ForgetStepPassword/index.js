@@ -3,6 +3,6 @@ import Component from './component';
 import validate from './validate';
 
 export default reduxForm({
-  form: 'forget',
+  form: 'forgetStepPassword',
   validate
 })(Component);

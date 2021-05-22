@@ -24,6 +24,12 @@ export const postRegister = (data, successCallback) => async dispatch => {
       }))
     )
     .then(res => {
+      const { httpStatus } = res;
+
+      if (httpStatus !== 200) {
+        return;
+      }
+
       dispatch({ type: ACTIONS.POST_REGISTER_SUCCESS, data: res });
       successCallback(res);
     })

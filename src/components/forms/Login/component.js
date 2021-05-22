@@ -17,7 +17,7 @@ const Component = props => {
   return (
     <View>
       <ScrollView contentContainerStyle={style.inputContainer}>
-        <Field component={InputField} name="email" placeholder="Email" label="Email" />
+        <Field component={InputField} name="email" placeholder="Email" label="Email" autoCapitalize="none" />
         <Field
           component={InputField}
           name="password"

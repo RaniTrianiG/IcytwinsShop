@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/prefer-default-export */
 import { API } from 'react-native-dotenv';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -14,7 +15,6 @@ export const postLogin = (body, successCallback) => async dispatch => {
     ...(body ? { body: JSON.stringify(body) } : null)
   };
 
-  // eslint-disable-next-line no-undef
   fetch(API + URLS.LOGIN, options)
     .then(response =>
       response.text().then(resData => ({
@@ -26,12 +26,14 @@ export const postLogin = (body, successCallback) => async dispatch => {
     .then(res => {
       const { data, httpStatus } = res;
 
-      if (httpStatus === 200) {
-        AsyncStorage.setItem('user-token', data.access_token);
-
-        dispatch({ type: ACTIONS.POST_LOGIN_SUCCESS, data: data.access_token });
-        successCallback(res);
+      if (httpStatus !== 200) {
+        return;
       }
+
+      AsyncStorage.setItem('user-token', data.access_token);
+
+      dispatch({ type: ACTIONS.POST_LOGIN_SUCCESS, data: data.access_token });
+      successCallback(res);
     })
     .catch(error => {
       dispatch({ type: ACTIONS.POST_LOGIN_FAILED, error });
@@ -47,7 +49,6 @@ export const getProfile = successCallback => async dispatch => {
     headers: defaultOpt.headers
   };
 
-  // eslint-disable-next-line no-undef
   fetch(API + URLS.PROFILE, options)
     .then(response =>
       response.text().then(resData => ({
